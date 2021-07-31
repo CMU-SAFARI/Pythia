@@ -1,5 +1,5 @@
 <p align="center">
-  <a href="https://github.com/rahulbera/Pythia">
+  <a href="https://github.com/CMU-SAFARI/Pythia">
     <img src="logo.png" alt="Logo" width="354" height="100">
   </a>
   <h3 align="center">A Customizable Hardware Prefetching Framework Using Online Reinforcement Learning
@@ -7,14 +7,11 @@
 </p>
 
 <p align="center">
-    <!-- <a href="https://circleci.com/gh/rahulbera/Pythia-HDL">
-        <img alt="Build" src="https://img.shields.io/circleci/build/github/rahulbera/Pythia-HDL/master">
-    </a> -->
-    <a href="https://github.com/rahulbera/Pythia/blob/master/LICENSE">
+    <a href="https://github.com/CMU-SAFARI/Pythia/blob/master/LICENSE">
         <img alt="GitHub" src="https://img.shields.io/badge/License-MIT-yellow.svg">
     </a>
-    <a href="https://github.com/rahulbera/Pythia/releases">
-        <img alt="GitHub release" src="https://img.shields.io/github/release/rahulbera/Pythia">
+    <a href="https://github.com/CMU-SAFARI/Pythia/releases">
+        <img alt="GitHub release" src="https://img.shields.io/github/release/CMU-SAFARI/Pythia">
     </a>
     <a href="https://doi.org/10.5281/zenodo.5149410"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5149410.svg" alt="DOI"></a>
 </p>
@@ -85,7 +82,7 @@ The infrastructure has been tested with the following system configuration:
 1. Clone the GitHub repo
    
    ```bash
-   git clone https://github.com/rahulbera/Pythia.git
+   git clone https://github.com/CMU-SAFARI/Pythia.git
    ```
 2. Clone the bloomfilter library inside Pythia home directory
    
@@ -180,9 +177,9 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
 We also implement Pythia in [Chisel HDL](https://www.chisel-lang.org) to faithfully measure the area and power cost. The implementation, along with the reports from umcL65 library, can be found the following GitHub repo. Please note that the area and power projections in the sample report is different than what is reported in the paper due to different technology.
 
 <p align="center">
-<a href="https://github.com/rahulbera/Pythia-HDL">Pythia-HDL</a>
-    <a href="https://github.com/rahulbera/Pythia-HDL">
-        <img alt="Build" src="https://github.com/rahulbera/Pythia-HDL/actions/workflows/test.yml/badge.svg">
+<a href="https://github.com/CMU-SAFARI/Pythia-HDL">Pythia-HDL</a>
+    <a href="https://github.com/CMU-SAFARI/Pythia-HDL">
+        <img alt="Build" src="https://github.com/CMU-SAFARI/Pythia-HDL/actions/workflows/test.yml/badge.svg">
     </a>
 </p>
 
