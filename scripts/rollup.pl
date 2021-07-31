@@ -20,6 +20,8 @@ GetOptions('tlist=s' => \$tlist_file,
 	   'ext=s' => \$ext,
 ) or die "Usage: $0 --exe <executable> --exp <exp file> --tlist <trace list>\n";
 
+die "\$PYTHIA_HOME env variable is not defined.\nHave you sourced setvars.sh?\n" unless defined $ENV{'PYTHIA_HOME'};
+
 die "Supply tlist\n" unless defined $tlist_file;
 die "Supply exp\n" unless defined $exp_file;
 die "Supply mfile\n" unless defined $mfile;

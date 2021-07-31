@@ -28,6 +28,8 @@ GetOptions('tlist=s' => \$tlist_file,
 	   'extra=s' => \$extra,
 ) or die "Usage: $0 --exe <executable> --exp <exp file> --tlist <trace list>\n";
 
+die "\$PYTHIA_HOME env variable is not defined.\nHave you sourced setvars.sh?\n" unless defined $ENV{'PYTHIA_HOME'};
+
 die "Supply exe\n" unless defined $exe;
 die "Supply tlist\n" unless defined $tlist_file;
 die "Supply exp\n" unless defined $exp_file;
@@ -49,6 +51,12 @@ if($ncores == 0)
 if($local eq "0")
 {
 	print "#!/bin/bash -l\n";
+	print "#\n";
+	print "#\n";
+}
+else
+{
+	print "#!/bin/bash\n";
 	print "#\n";
 	print "#\n";
 }
@@ -110,9 +118,10 @@ foreach $trace (@trace_info)
 		}
 		
 		# Additional hook replace
-		$cmdline =~ s/\$(EXP)/$exp_name/g;
-		$cmdline =~ s/\$(TRACE)/$trace_name/g;
-		$cmdline =~ s/\$(NCORES)/$ncores/g;
+		$cmdline =~ s/\$\(PYTHIA_HOME\)/$ENV{'PYTHIA_HOME'}/g;
+		$cmdline =~ s/\$\(EXP\)/$exp_name/g;
+		$cmdline =~ s/\$\(TRACE\)/$trace_name/g;
+		$cmdline =~ s/\$\(NCORES\)/$ncores/g;
 		
 		print "$cmdline\n";
 	}
