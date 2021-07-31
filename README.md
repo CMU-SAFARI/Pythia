@@ -106,7 +106,7 @@ The infrastructure has been tested with the following system configuration:
    ```
    Please use `build_champsim_highcore.sh` to build ChampSim for more than four cores.
 
-5. Set appropriate environment variables before doing any experiment as follows:
+5. _Set appropriate environment variables as follows:_
 
     ```bash
     source setvars.sh
@@ -122,7 +122,7 @@ The infrastructure has been tested with the following system configuration:
     ```
 > Note: the total size of all traces would be **~52 GB**.
 
-2. Once all traces are downloaded, please replace the dummy path in `experiments/MICRO21_1C.tlist` and `experiments/MICRO21_4C.tlist` with the full path of your trace directory.
+2. If the traces are downloaded in some other path, please change the full path in `experiments/MICRO21_1C.tlist` and `experiments/MICRO21_4C.tlist` accordingly.
 
 ### More Traces
 1. We are also releasing a new set of ChampSim traces from [PARSEC 2.1](https://parsec.cs.princeton.edu) and [Ligra](https://github.com/jshun/ligra). The trace drop-points are measured using [Intel Pinplay](https://software.intel.com/content/www/us/en/develop/articles/program-recordreplay-toolkit.html) and the traces are captured by the ChampSim PIN tool. The traces can be found in the following links:
@@ -143,7 +143,7 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
       * `exe`: the full path of the executable to run
       * `tlist`: contains trace definitions
       * `exp`: contains knobs of the experiements to run
-3. Create experiments as follows. Please make sure the paths used in tlist and exp files are appropriately changed.
+3. Create experiments as follows. _Please make sure the paths used in tlist and exp files are appropriate_.
    
       ```bash
       cd $PYTHIA_HOME/experiments/
@@ -164,7 +164,7 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
       * `tlist`
       * `exp`
       * `mfile`: specifies stat names and reduction method to rollup
-3. Rollup statistics as follows. Please make sure the paths used in tlist and exp files are appropriately changed.
+3. Rollup statistics as follows. _Please make sure the paths used in tlist and exp files are appropriate_.
    
       ```bash
       cd experiements_1C/
