@@ -16,7 +16,7 @@
     <a href="https://github.com/rahulbera/Pythia/releases">
         <img alt="GitHub release" src="https://img.shields.io/github/release/rahulbera/Pythia">
     </a>
-    <a href="https://zenodo.org/badge/latestdoi/155220641"><img src="https://zenodo.org/badge/155220641.svg" alt="DOI"></a>
+    <a href="https://doi.org/10.5281/zenodo.5149410"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5149410.svg" alt="DOI"></a>
 </p>
 
 <details open="open">
