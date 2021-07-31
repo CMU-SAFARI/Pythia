@@ -145,7 +145,7 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
       * `exe`: the full path of the executable to run
       * `tlist`: contains trace definitions
       * `exp`: contains knobs of the experiements to run
-3. Create experiments as follows:
+3. Create experiments as follows. Please make sure the paths used in tlist and exp files are appropriately changed.
    
       ```bash
       cd experiments/
@@ -167,11 +167,11 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
       * `tlist`
       * `exp`
       * `mfile`: specifies stat names and reduction method to rollup
-3. Rollup statistics as follows:
+3. Rollup statistics as follows. Please make sure the paths used in tlist and exp files are appropriately changed.
    
       ```bash
-      cd pythia_1C_experiments/
-      perl ../../scripts/rollup.pl --tlist ../MICRO21_1C.tlist --exp ../MICRO21_1C.exp --mfile ../MICRO21_1T.mfile > rollup.csv
+      cd experiements_1C/
+      perl ../../scripts/rollup.pl --tlist ../MICRO21_1C.tlist --exp ../MICRO21_1C.exp --mfile ../rollup_1C_base_config.mfile > rollup.csv
       ```
 
 4. Export the `rollup.csv` file in you favourite data processor (Python Pandas, Excel, Numbers, etc.) to gain insights.
@@ -182,7 +182,7 @@ If you use this framework, please cite the following paper:
 @inproceedings{bera2021,
   author = {Bera, Rahul and Kanellopoulos, Konstantinos and Nori, Anant V. and Shahroodi, Taha and Subramoney, Sreenivas and Mutlu, Onur},
   title = {{Pythia: A Customizable Hardware Prefetching Framework Using Online Reinforcement Learning}},
-  booktitle = {Proceedings of the 54th Annual IEEE/ACM International Symposium on Microarchitecture (MICRO)},
+  booktitle = {Proceedings of the 54th Annual IEEE/ACM International Symposium on Microarchitecture},
   year = {2021}
 }
 ```
