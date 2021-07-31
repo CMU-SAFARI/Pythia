@@ -13,7 +13,7 @@
     <a href="https://github.com/CMU-SAFARI/Pythia/releases">
         <img alt="GitHub release" src="https://img.shields.io/github/release/CMU-SAFARI/Pythia">
     </a>
-    <a href="https://doi.org/10.5281/zenodo.5149410"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5149410.svg" alt="DOI"></a>
+    <a href="https://doi.org/10.5281/zenodo.5150706"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5150706.svg" alt="DOI"></a>
 </p>
 
 <details open="open">
