@@ -1,0 +1,110 @@
+--- pari-2.7.0/src/language/anal.c.orig	2014-03-20 01:59:28.000000000 -0700
++++ pari-2.7.0/src/language/anal.c	2019-03-01 03:36:32.318091200 -0800
+@@ -233,6 +233,7 @@ check_proto(const char *code)
+ {
+   long arity = 0;
+   const char *s = code, *old;
++  if (*s == 'x') { s++; arity++; }
+   if (*s == 'l' || *s == 'v' || *s == 'i' || *s == 'm') s++;
+   while (*s && *s != '\n') switch (*s++)
+   {
+@@ -249,7 +250,6 @@ check_proto(const char *code)
+     case 'n':
+     case 'p':
+     case 'r':
+-    case 'x':
+       arity++;
+       break;
+     case 'E':
+@@ -272,6 +272,7 @@ check_proto(const char *code)
+     case ',': break;
+     case '\n': break; /* Before the mnemonic */
+ 
++    case 'x':
+     case 'm':
+     case 'l':
+     case 'i':
+@@ -312,7 +313,11 @@ install(void *f, const char *name, const
+   {
+     if (ep->valence != EpINSTALL)
+       pari_err(e_MISC,"[install] identifier '%s' already in use", name);
+-    pari_warn(warner, "[install] updating '%s' prototype; module not reloaded", name);
++    if (foreignFuncFree && ep->code && (*ep->code == 'x'))
++      (*foreignFuncFree)(ep); /* function created by foreign interpreter */
++    else
++      pari_warn(warner, "[install] updating '%s' prototype; module not reloaded", name);
++
+     if (ep->code) pari_free((void*)ep->code);
+   }
+   else
+--- pari-2.5.0/src/language/compile.c-pre	2011-05-30 02:28:26.000000000 -0700
++++ pari-2.5.0/src/language/compile.c	2018-08-06 12:27:55.215797500 -0700
+@@ -488,9 +488,10 @@ detag(long n)
+ 
+ /* return type for GP functions */
+ static op_code
+-get_ret_type(const char **p, long arity, Gtype *t, long *flag)
++get_ret_type(const char **p, long arity, Gtype *t, long *flag, long *is_external)
+ {
+-  *flag = 0;
++  *flag = *is_external = 0;
++  if (**p == 'x') { (*p)++; *is_external = 1; }
+   if (**p == 'v') { (*p)++; *t=Gvoid; return OCcallvoid; }
+   else if (**p == 'i') { (*p)++; *t=Gsmall; return OCcallint; }
+   else if (**p == 'l') { (*p)++; *t=Gsmall; return OCcalllong; }
+@@ -880,7 +881,7 @@ compilefunc(entree *ep, long n, int mode
+   long j;
+   long x=tree[n].x, y=tree[n].y;
+   op_code ret_op;
+-  long ret_flag;
++  long ret_flag, is_external;
+   Gtype ret_typ;
+   char const *p,*q;
+   char c;
+@@ -1031,11 +1032,12 @@ compilefunc(entree *ep, long n, int mode
+   if (!ep->value)
+     compile_err("unknown function",tree[n].str);
+   nbopcodes = s_opcode.n;
+-  ret_op = get_ret_type(&p, ep->arity, &ret_typ, &ret_flag);
++  ret_op = get_ret_type(&p, ep->arity, &ret_typ, &ret_flag, &is_external);
+   j=1;
++  if (is_external) op_push(OCpushlong,(long)ep,n);	/* as in PPauto */
+   if (*p)
+   {
+     q=p;
+     while((mod=parseproto(&p,&c,tree[n].str))!=PPend)
+     {
+       if (j<=nb && tree[arg[j]].f!=Fnoarg
+@@ -1347,8 +1349,8 @@ genclosure(entree *ep, const char *loc,
+   long arity=0, maskarg=0, maskarg0=0, stop=0;
+   PPproto mod;
+   Gtype ret_typ;
+-  long ret_flag;
+-  op_code ret_op=get_ret_type(&code,ep->arity,&ret_typ,&ret_flag);
++  long ret_flag, is_external;
++  op_code ret_op=get_ret_type(&code,ep->arity,&ret_typ,&ret_flag,&is_external);
+   p=code;
+   while ((mod=parseproto(&p,&c,NULL))!=PPend)
+   {
+@@ -1391,6 +1393,7 @@ genclosure(entree *ep, const char *loc,
+   if (maskarg)  op_push_loc(OCcheckargs,maskarg,loc);
+   if (maskarg0) op_push_loc(OCcheckargs0,maskarg0,loc);
+   p=code;
++  if (is_external) op_push_loc(OCpushlong,(long)ep,loc);	/* as in PPauto */
+   while ((mod=parseproto(&p,&c,NULL))!=PPend)
+   {
+     switch(mod)
+@@ -1889,11 +1892,11 @@ optimizefunc(entree *ep, long n)
+   const char *p=ep->code;
+   char c;
+   GEN arg = listtogen(y,Flistarg);
+-  long nb=lg(arg)-1, ret_flag;
++  long nb=lg(arg)-1, ret_flag, is_external /* ignored */;
+   if (!p)
+     fl=0;
+   else
+-    (void) get_ret_type(&p, 2, &t, &ret_flag);
++    (void) get_ret_type(&p, 2, &t, &ret_flag, &is_external);
+   if (p && *p)
+   {
+     j=1;

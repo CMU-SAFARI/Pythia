@@ -1,0 +1,71 @@
+--- pari-2.5.0/src/headers/paricom.h-pre	2011-05-30 02:28:34.000000000 -0700
++++ pari-2.5.0/src/headers/paricom.h	2018-09-16 00:04:16.527215600 -0700
+@@ -73,6 +73,10 @@ extern void (*cb_pari_sigint)(void);
+ extern int (*cb_pari_handle_exception)(long);
+ extern void (*cb_pari_err_recover)(long);
+ 
++#define CB_EXCEPTION_FLAGS 1
++extern int cb_exception_resets_avma;
++extern int cb_exception_flushes_err;
++
+ enum manage_var_t {
+   manage_var_create,
+   manage_var_delete,
+--- pari-2.5.5/src/language/eval.c.orig	2013-06-24 16:06:58.000000000 -0700
++++ pari-2.5.5/src/language/eval.c	2019-02-27 04:19:10.374415800 -0800
+@@ -1323,7 +1323,8 @@ evalstate_reset(void)
+   reset_break();
+   compilestate_reset();
+   parsestate_reset();
+-  avma = top;
++  if (!cb_exception_resets_avma)
++    avma = top;
+ }
+ 
+ void
+--- pari-2.5.0/src/language/init.c-pre	2011-05-30 02:28:26.000000000 -0700
++++ pari-2.5.0/src/language/init.c	2018-09-19 03:34:41.813699200 -0700
+@@ -93,6 +93,9 @@ int  (*cb_pari_whatnow)(PariOUT *out, co
+ void (*cb_pari_sigint)(void);
+ void (*cb_pari_err_recover)(long);
+ 
++int cb_exception_resets_avma = 0;
++int cb_exception_flushes_err = 0;
++
+ typedef struct {
+   jmp_buf *penv;
+   long flag;
+@@ -896,8 +899,11 @@ err_recover(long numerr)
+   s_ERR_CATCH.n = 0;
+   dbg_release();
+   global_err_data = NULL;
+-  out_puts(pariErr, "\n");
+-  pariErr->flush();
++
++  if (!cb_exception_flushes_err) {
++    out_puts(pariErr, "\n");		/* What is this doing in generic code?  It was flushed already, so this is just an empty error message! */
++    pariErr->flush();			/* If an empty line is needed by gp, this should be done in gp's error handler! */
++  }
+ 
+   cb_pari_err_recover(numerr);
+ }
+@@ -975,7 +981,8 @@ pari_sigint(const char *time_s)
+   out_puts(pariErr, "user interrupt after ");
+   out_puts(pariErr, time_s);
+   out_term_color(pariErr, c_NONE);
+-  pariErr->flush();
++  if (!cb_exception_flushes_err)
++    pariErr->flush();
+   if (cb_pari_handle_exception &&
+       cb_pari_handle_exception(-1)) return;
+   err_recover(talker);
+@@ -1118,7 +1125,8 @@ pari_err(int numerr, ...)
+     pariErr->puts(buf);
+     pariErr->puts("  [hint] you can increase GP stack with allocatemem()\n");
+   }
+-  pariErr->flush();
++  if (!cb_exception_flushes_err)
++    pariErr->flush();
+   if (cb_pari_handle_exception &&
+       cb_pari_handle_exception(numerr)) return;
+   err_recover(numerr);

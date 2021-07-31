@@ -1,0 +1,54 @@
+# include as in gdb --init-command gdbinit-my --args perl OPTIONS
+
+# See https://pari.math.u-bordeaux.fr/Events/PARI2012/talks/source.pdf
+# No `document Foo Bar' commands there!
+
+#  conflicts with `info'
+define i
+  call output((GEN)$arg0)
+end
+
+# What do these functions do with Pari stack???
+
+define ilb
+  call outmat(lift(lift(lift((GEN)$arg0))))
+end
+
+# prec_w: shallow copy with precision decreased
+
+define isb
+  call outmat(gprec_w((GEN)$arg0,3))
+end
+
+# Recursively display structure, truncating leaves at 2 words (or the second argument) [($argc > 1 ? $arg1 : 2) does not work]
+
+define v
+  if $argc > 1
+    call dbgGEN((GEN)$arg0, $arg1)
+  else
+    call dbgGEN((GEN)$arg0, 2)
+  end
+end
+
+# ============ Added ============
+
+define heap
+  call dbg_pari_heap()
+end
+
+# ============ Advanced (with bb renamed to be, cc to ss ============
+
+define w1
+  shell rm -f /tmp/gp.tmp1
+  call gpwritebin("/tmp/gp.tmp1",$arg0)
+end
+define be
+  break pari_err
+#  break pari_err2GEN
+end
+define ss
+  signal SIGINT
+end
+define fs
+  p fill_stack()
+end

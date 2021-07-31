@@ -1,0 +1,60 @@
+--- pari-2.7.0/src/language/eval.c-pre	2019-03-01 03:30:30.428655500 -0800
++++ pari-2.7.0/src/language/eval.c	2019-03-01 17:29:05.309988700 -0800
+@@ -136,6 +136,9 @@ pop_val(entree *ep)
+ void
+ freeep(entree *ep)
+ {
++  if (foreignFuncFree && ep->code && (*ep->code == 'x'))
++    (*foreignFuncFree)(ep); /* function created by foreign interpreter */
++
+   if (EpSTATIC(ep)) return; /* gp function loaded at init time */
+   if (ep->help) {pari_free((void*)ep->help); ep->help=NULL;}
+   if (ep->code) {pari_free((void*)ep->code); ep->code=NULL;}
+--- pari-2.7.0/src/language/init.c-pre	2019-03-01 03:44:51.207967500 -0800
++++ pari-2.7.0/src/language/init.c	2019-03-01 17:28:05.405883500 -0800
+@@ -85,6 +85,9 @@ static pari_stack s_MODULES, s_OLDMODULE
+ const long functions_tblsz = 135; /* size of functions_hash */
+ entree **functions_hash, **defaults_hash;
+ 
++entree* (*foreignAutoload)(const char*, long len); /* Autoloader         */
++void (*foreignFuncFree)(entree *);    /* How to free external entree.    */
++
+ void (*cb_pari_ask_confirm)(const char *);
+ int  (*cb_pari_handle_exception)(long);
+ int  (*cb_pari_whatnow)(PariOUT *out, const char *, int);
+@@ -2340,6 +2346,12 @@ pari_version(void)
+  *
+  * Syntax requirements:
+  *  = Separator '=' required.
++ *
++ * Origin:
++ *  x Installed foreign function. Put the ep of the function as the
++ *       first argument, fill the rest with PARI arguments,
++ *       then call installedHandler with these arguments.
++ *       Should be the first char in the code.
+  ****************************************************************************
+  */
+ #include "init.h"
+--- pari-2.7.0/src/language/anal.h-pre	2014-03-20 01:59:28.000000000 -0700
++++ pari-2.7.0/src/language/anal.h	2019-03-01 17:21:54.576632100 -0800
+@@ -33,6 +33,9 @@ void   pari_fill_hashtable(entree **tabl
+ void compile_err(const char *msg, const char *str);
+ void compile_varerr(const char *str);
+ 
++extern entree * (*foreignAutoload)(const char*, long len);
++extern void (*foreignFuncFree)(entree *);
++
+ #ifdef STACK_CHECK
+ extern THREAD void *PARI_stack_limit;
+ #endif
+--- pari-2.7.0/src/language/anal.c-pre	2019-03-01 03:36:32.318091200 -0800
++++ pari-2.7.0/src/language/anal.c	2019-03-01 17:24:51.107542200 -0800
+@@ -753,6 +753,8 @@ findentry(const char *name, long len, en
+   entree *ep;
+   for (ep = ep1; ep; ep = ep->next)
+     if (!strncmp(ep->name, name, len) && !(ep->name)[len]) return ep;
++  if (foreignAutoload) /* Try to autoload. */
++    return foreignAutoload(name,len);
+   return NULL; /* not found */
+ }
+ 

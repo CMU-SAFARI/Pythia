@@ -1,0 +1,62 @@
+##############################################################
+##
+## This file contains all the experiments required
+## to reproduce single-core performance results of Pythia.
+##
+## Please follow the README to know how to use this file.
+## 
+## Owner: Rahul Bera (write2bera@gmail.com)
+##
+###############################################################
+
+
+# configurations
+BASE = --warmup_instructions=100000000 --simulation_instructions=500000000
+NOPREF = --config=/mnt/panzer/rahbera/ChampSim/config/nopref.ini
+STRIDE = --l2c_prefetcher_types=stride --config=/mnt/panzer/rahbera/ChampSim/config/stride.ini
+SPP_DEV2 = --l2c_prefetcher_types=spp_dev2 --config=/mnt/panzer/rahbera/ChampSim/config/spp_dev2.ini
+MLOP = --l2c_prefetcher_types=mlop --config=/mnt/panzer/rahbera/ChampSim/config/mlop.ini
+BINGO = --l2c_prefetcher_types=bingo --config=/mnt/panzer/rahbera/ChampSim/config/bingo.ini
+PYTHIA = --l2c_prefetcher_types=scooby --config=/mnt/panzer/rahbera/ChampSim/config/pythia.ini
+
+nopref						$(BASE) $(NOPREF)
+spp						$(BASE) $(SPP_DEV2)
+bingo						$(BASE) $(BINGO)
+mlop						$(BASE) $(MLOP)
+pythia						$(BASE) $(PYTHIA)
+
+nopref_MTPS150					$(BASE) $(NOPREF) --dram_io_freq=150
+spp_MTPS150					$(BASE) $(SPP_DEV2) --dram_io_freq=150
+bingo_MTPS150					$(BASE) $(BINGO) --dram_io_freq=150
+mlop_MTPS150					$(BASE) $(MLOP) --dram_io_freq=150
+pythia_MTPS150 					$(BASE) $(PYTHIA) --dram_io_freq=150
+
+nopref_MTPS300					$(BASE) $(NOPREF) --dram_io_freq=300
+spp_MTPS300					$(BASE) $(SPP_DEV2) --dram_io_freq=300
+bingo_MTPS300					$(BASE) $(BINGO) --dram_io_freq=300
+mlop_MTPS300					$(BASE) $(MLOP) --dram_io_freq=300
+pythia_MTPS300 					$(BASE) $(PYTHIA) --dram_io_freq=300
+
+nopref_MTPS600					$(BASE) $(NOPREF) --dram_io_freq=600
+spp_MTPS600					$(BASE) $(SPP_DEV2) --dram_io_freq=600
+bingo_MTPS600					$(BASE) $(BINGO) --dram_io_freq=600
+mlop_MTPS600					$(BASE) $(MLOP) --dram_io_freq=600
+pythia_MTPS600 					$(BASE) $(PYTHIA) --dram_io_freq=600
+
+nopref_MTPS1200					$(BASE) $(NOPREF) --dram_io_freq=1200
+spp_MTPS1200					$(BASE) $(SPP_DEV2) --dram_io_freq=1200
+bingo_MTPS1200					$(BASE) $(BINGO) --dram_io_freq=1200
+mlop_MTPS1200					$(BASE) $(MLOP) --dram_io_freq=1200
+pythia_MTPS1200 				$(BASE) $(PYTHIA) --dram_io_freq=1200
+
+nopref_MTPS4800					$(BASE) $(NOPREF) --dram_io_freq=4800
+spp_MTPS4800					$(BASE) $(SPP_DEV2) --dram_io_freq=4800
+bingo_MTPS4800					$(BASE) $(BINGO) --dram_io_freq=4800
+mlop_MTPS4800					$(BASE) $(MLOP) --dram_io_freq=4800
+pythia_MTPS4800 				$(BASE) $(PYTHIA) --dram_io_freq=4800
+
+nopref_MTPS9600					$(BASE) $(NOPREF) --dram_io_freq=9600
+spp_MTPS9600					$(BASE) $(SPP_DEV2) --dram_io_freq=9600
+bingo_MTPS9600					$(BASE) $(BINGO) --dram_io_freq=9600
+mlop_MTPS9600					$(BASE) $(MLOP) --dram_io_freq=9600
+pythia_MTPS9600 				$(BASE) $(PYTHIA) --dram_io_freq=9600

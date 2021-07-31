@@ -1,0 +1,25 @@
+Revision history for Perl extension Math::Combinatorics.
+
+0.01  Tue Sep 21 19:06:32 2004
+	- original version; created by h2xs 1.21 with options
+		-AXn Math::Combinatorics
+
+0.02  o Bugfix to permute() method, reported by Marc Logghe.
+      o Combinations/Permutations now calculated using iterator.
+        Uses less memory for very large sets (David Coppit, Tye,
+        Christopher Eltschka).
+
+0.03  o Added reference to Set::Scalar, Set::Bag
+      o new() accepts a 'compare' option.
+      o new() presorts the set by this ('compare' value is a sorting
+        subroutine code reference).  this addresses a combine/permute
+        bug when using a set of references, identified by Ying Yang
+        <yyang@emba.uvm.edu>.
+
+0.06  o Added multiset, string, and derangement methods for OO mode
+      o Corrections to documentation examples
+
+0.07  o Fixed syntax error under 5.8.7
+0.08  o Eh?
+0.09  o Optimized re-implemention of derange() by Carlos Rica
+        <carlos@red-libertaria.net>

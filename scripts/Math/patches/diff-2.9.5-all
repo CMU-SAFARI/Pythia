@@ -1,0 +1,212 @@
+diff -pru pari-2.9.0-ini/src/language/anal.c pari-2.9.0/src/language/anal.c
+--- pari-2.9.0-ini/src/language/anal.c	2016-10-07 07:16:44.000000000 -0700
++++ pari-2.9.0/src/language/anal.c	2019-03-06 02:55:52.192006500 -0800
+@@ -261,6 +261,10 @@ findentry(const char *s, long len, entre
+       if (!strncmp(t, s, len) && !t[len]) return ep;
+     }
+   /* not found */
++  if (foreignAutoload) {	/* Try to autoload. */
++    ep = foreignAutoload(s,len);
++    if(ep) return ep;
++  }  /* not found */
+   if (insert) { ep = initep(s,len); insertep(ep, T, hash); }
+   return ep;
+ }
+@@ -317,7 +317,7 @@ check_proto(const char *code)
+ {
+   long arity = 0;
+   const char *s = code, *old;
+-  if (*s == 'l' || *s == 'v' || *s == 'i' || *s == 'm' || *s == 'u') s++;
++  if (*s == 'l' || *s == 'v' || *s == 'i' || *s == 'm' || *s == 'u' || *s == 'x') arity += (*s == 'x'), s++;
+   while (*s && *s != '\n') switch (*s++)
+   {
+     case '&':
+@@ -353,6 +357,7 @@ check_proto(const char *code)
+     case ',': break;
+     case '\n': break; /* Before the mnemonic */
+ 
++    case 'x':
+     case 'm':
+     case 'l':
+     case 'i':
+@@ -383,7 +388,11 @@ install(void *f, const char *name, const
+   {
+     if (ep->valence != EpINSTALL)
+       pari_err(e_MISC,"[install] identifier '%s' already in use", name);
+-    pari_warn(warner, "[install] updating '%s' prototype; module not reloaded", name);
++    if (foreignFuncFree && ep->code && (*ep->code == 'x'))
++      (*foreignFuncFree)(ep); /* function created by foreign interpreter */
++    else
++      pari_warn(warner, "[install] updating '%s' prototype; module not reloaded", name);
++
+     if (ep->code) pari_free((void*)ep->code);
+   }
+   else
+diff -pru pari-2.9.0-ini/src/language/anal.h pari-2.9.0/src/language/anal.h
+--- pari-2.9.0-ini/src/language/anal.h	2016-10-01 04:23:18.000000000 -0700
++++ pari-2.9.0/src/language/anal.h	2019-03-06 02:48:18.136608900 -0800
+@@ -34,6 +34,9 @@ void   pari_fill_hashtable(entree **tabl
+ void compile_err(const char *msg, const char *str);
+ void compile_varerr(const char *str);
+ 
++extern entree * (*foreignAutoload)(const char*, long len);
++extern void (*foreignFuncFree)(entree *);
++
+ #ifdef STACK_CHECK
+ extern THREAD void *PARI_stack_limit;
+ #endif
+diff -pru pari-2.9.0-ini/src/language/compile.c pari-2.9.0/src/language/compile.c
+--- pari-2.9.0-ini/src/language/compile.c	2016-10-05 02:43:38.000000000 -0700
++++ pari-2.9.0/src/language/compile.c	2019-03-06 02:48:18.027408700 -0800
+@@ -519,9 +519,10 @@ detag(long n)
+ 
+ /* return type for GP functions */
+ static op_code
+-get_ret_type(const char **p, long arity, Gtype *t, long *flag)
++get_ret_type(const char **p, long arity, Gtype *t, long *flag, long *is_external)
+ {
+-  *flag = 0;
++  *flag = *is_external = 0;
++  if (**p == 'x') { (*p)++; *is_external = 1; }
+   if (**p == 'v') { (*p)++; *t=Gvoid; return OCcallvoid; }
+   else if (**p == 'i') { (*p)++; *t=Gsmall;  return OCcallint; }
+   else if (**p == 'l') { (*p)++; *t=Gsmall;  return OCcalllong; }
+@@ -1203,7 +1204,7 @@ compilefunc(entree *ep, long n, int mode
+   long j;
+   long x=tree[n].x, y=tree[n].y;
+   op_code ret_op;
+-  long ret_flag;
++  long ret_flag, is_external;
+   Gtype ret_typ;
+   char const *p,*q;
+   char c;
+@@ -1334,11 +1335,12 @@ compilefunc(entree *ep, long n, int mode
+   if (!ep->value)
+     compile_err("unknown function",tree[n].str);
+   nbopcodes = s_opcode.n;
+-  ret_op = get_ret_type(&p, ep->arity, &ret_typ, &ret_flag);
++  ret_op = get_ret_type(&p, ep->arity, &ret_typ, &ret_flag, &is_external);
+   j=1;
++  if (is_external) op_push(OCpushlong,(long)ep,n);	/* as in PPauto */
+   if (*p)
+   {
+     q=p;
+     while((mod=parseproto(&p,&c,tree[n].str))!=PPend)
+     {
+       if (j<=nb && tree[arg[j]].f!=Fnoarg
+@@ -1661,8 +1663,8 @@ genclosure(entree *ep, const char *loc,
+   long arity=0, maskarg=0, maskarg0=0, stop=0, dovararg=0;
+   PPproto mod;
+   Gtype ret_typ;
+-  long ret_flag;
+-  op_code ret_op=get_ret_type(&code,ep->arity,&ret_typ,&ret_flag);
++  long ret_flag, is_external;
++  op_code ret_op=get_ret_type(&code,ep->arity,&ret_typ,&ret_flag,&is_external);
+   p=code;
+   while ((mod=parseproto(&p,&c,NULL))!=PPend)
+   {
+@@ -1705,6 +1707,7 @@ genclosure(entree *ep, const char *loc,
+   if (maskarg)  op_push_loc(OCcheckargs,maskarg,loc);
+   if (maskarg0) op_push_loc(OCcheckargs0,maskarg0,loc);
+   p=code;
++  if (is_external) op_push_loc(OCpushlong,(long)ep,loc);	/* as in PPauto */
+   while ((mod=parseproto(&p,&c,NULL))!=PPend)
+   {
+     switch(mod)
+@@ -2292,14 +2292,14 @@ optimizefunc(entree *ep, long n)
+   const char *p;
+   char c;
+   GEN arg = listtogen(y,Flistarg);
+-  long nb=lg(arg)-1, ret_flag;
++  long nb=lg(arg)-1, ret_flag, is_external /* ignored */;
+   if (is_func_named(ep,"if") && nb>=4)
+     ep=is_entry("_multi_if");
+   p = ep->code;
+   if (!p)
+     fl=0;
+   else
+-    (void) get_ret_type(&p, 2, &t, &ret_flag);
++    (void) get_ret_type(&p, 2, &t, &ret_flag, &is_external);
+   if (p && *p)
+   {
+     j=1;
+diff -pru pari-2.9.0-ini/src/language/eval.c pari-2.9.0/src/language/eval.c
+--- pari-2.9.0-ini/src/language/eval.c	2016-10-05 02:43:38.000000000 -0700
++++ pari-2.9.0/src/language/eval.c	2019-03-06 02:58:32.731888400 -0800
+@@ -138,6 +138,9 @@ pop_val(entree *ep)
+ void
+ freeep(entree *ep)
+ {
++  if (foreignFuncFree && ep->code && (*ep->code == 'x'))
++    (*foreignFuncFree)(ep); /* function created by foreign interpreter */
++
+   if (EpSTATIC(ep)) return; /* gp function loaded at init time */
+   if (ep->help) {pari_free((void*)ep->help); ep->help=NULL;}
+   if (ep->code) {pari_free((void*)ep->code); ep->code=NULL;}
+@@ -1535,7 +1538,8 @@ evalstate_reset(void)
+   reset_break();
+   compilestate_reset();
+   parsestate_reset();
+-  avma = pari_mainstack->top;
++  if (!cb_exception_resets_avma)
++    avma = pari_mainstack->top;
+ }
+ 
+ void
+diff -pru pari-2.9.0-ini/src/language/init.c pari-2.9.0/src/language/init.c
+--- pari-2.9.0-ini/src/language/init.c	2016-10-25 01:15:32.000000000 -0700
++++ pari-2.9.0/src/language/init.c	2019-03-06 03:00:07.190054300 -0800
+@@ -113,6 +113,9 @@ static pari_stack s_MODULES;
+ const long functions_tblsz = 135; /* size of functions_hash */
+ entree **functions_hash, **defaults_hash;
+ 
++entree* (*foreignAutoload)(const char*, long len); /* Autoloader         */
++void (*foreignFuncFree)(entree *);    /* How to free external entree.    */
++
+ char *(*cb_pari_fgets_interactive)(char *s, int n, FILE *f);
+ int (*cb_pari_get_line_interactive)(const char*, const char*, filtre_t *F);
+ void (*cb_pari_quit)(long);
+@@ -130,6 +133,9 @@ void (*cb_pari_start_output)();
+ 
+ const char * pari_library_path = NULL;
+ 
++int cb_exception_resets_avma = 0;
++int cb_exception_flushes_err = 0;
++
+ static THREAD GEN global_err_data;
+ THREAD jmp_buf *iferr_env;
+ const long CATCH_ALL = -1;
+@@ -1141,7 +1147,8 @@ pari_sigint(const char *time_s)
+   out_puts(pariErr, "user interrupt after ");
+   out_puts(pariErr, time_s);
+   out_term_color(pariErr, c_NONE);
+-  pariErr->flush();
++  if (!cb_exception_flushes_err)
++    pariErr->flush();
+   if (cb_pari_handle_exception)
+     recover = cb_pari_handle_exception(-1);
+   if (!recover && !block)
+@@ -1505,7 +1505,9 @@ pari_err_display(GEN err)
+     pari_free(s);
+   }
+   out_term_color(pariErr, c_NONE);
+-  pariErr->flush(); return 0;
++  if (!cb_exception_flushes_err)
++    pariErr->flush();
++  return 0;
+ }
+ 
+ void
+--- pari-2.9.0/src/headers/paricom.h-pre	2011-05-30 02:28:34.000000000 -0700
++++ pari-2.9.0/src/headers/paricom.h	2018-09-16 00:04:16.527215600 -0700
+@@ -92,6 +92,10 @@ extern void (*cb_pari_start_output)(void
+ extern const char *pari_library_path;
+ extern THREAD long *varpriority;
+ 
++#define CB_EXCEPTION_FLAGS 1
++extern int cb_exception_resets_avma;
++extern int cb_exception_flushes_err;
++
+ /* pari_init_opts */
+ enum {
+   INIT_JMPm = 1,

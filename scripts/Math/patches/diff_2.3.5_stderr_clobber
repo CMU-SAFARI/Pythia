@@ -1,0 +1,68 @@
+--- ./src/language/init.c-pre	2008-03-31 04:43:58.000000000 -0700
++++ ./src/language/init.c	2014-04-25 11:50:25.678357100 -0700
+@@ -1026,19 +1026,22 @@ err_recover(long numerr)
+   longjmp(GP_DATA->env, numerr);
+ }
+ 
++static int stderr_was_newline = 1;
++
+ void
+ pari_warn(long numerr, ...)
+ {
+   char *ch1;
+   PariOUT *out = pariOut;
++  int out_was_newline = pari_last_was_newline();
+   va_list ap;
+ 
+   va_start(ap,numerr);
+ 
+-  if (!pari_last_was_newline())
+-    pariputc('\n'); /* make sure pari_err msg starts at the beginning of line */
+   pariflush(); pariOut = pariErr;
+   pariflush(); term_color(c_ERR);
++  if (!stderr_was_newline)
++    pariputc('\n'); /* make sure pari_err msg starts at the beginning of line */
+ 
+   if (gp_function_name)
+     pariprintf("  *** %s: %s", gp_function_name, errmessage[numerr]);
+@@ -1061,7 +1064,9 @@ pari_warn(long numerr, ...)
+       break;
+   }
+   term_color(c_NONE); va_end(ap);
++  stderr_was_newline = pari_last_was_newline();		/* Always true with warn */
+   pariOut = out;
++  pari_set_last_newline(out_was_newline);
+   flusherr();
+ }
+ 
+@@ -1070,6 +1075,7 @@ pari_err(long numerr, ...)
+ {
+   char s[128], *ch1;
+   PariOUT *out = pariOut;
++  int out_was_newline = pari_last_was_newline();
+   va_list ap;
+ 
+   va_start(ap,numerr);
+@@ -1091,10 +1097,10 @@ pari_err(long numerr, ...)
+     }
+   }
+ 
+-  if (!pari_last_was_newline())
+-    pariputc('\n'); /* make sure pari_err msg starts at the beginning of line */
+   pariflush(); pariOut = pariErr;
+   pariflush(); term_color(c_ERR);
++  if (!stderr_was_newline)
++    pariputc('\n'); /* make sure pari_err msg starts at the beginning of line */
+ 
+   if (numerr <= cant_deflate)
+   {
+@@ -1182,7 +1188,9 @@ pari_err(long numerr, ...)
+     fprintferr("\n  current stack size: %lu (%.3f Mbytes)\n", d, d/1048576.);
+     fprintferr("  [hint] you can increase GP stack with allocatemem()\n");
+   }
++  stderr_was_newline = pari_last_was_newline();
+   pariOut = out;
++  pari_set_last_newline(out_was_newline);
+   gp_function_name=NULL;
+   if (default_exception_handler)
+   {

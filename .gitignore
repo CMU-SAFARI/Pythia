@@ -1,0 +1,22 @@
+# Auto-created directories
+.DS_Store
+._.DS_Store
+.vscode/
+
+# Executable
+bin/
+obj/
+
+# Traces
+dpc3_traces/
+traces/
+cvp1_traces/
+
+# Run directory
+runs/
+
+# Others  
+tracer/obj-intel64/
+tags
+*.out
+libbf/

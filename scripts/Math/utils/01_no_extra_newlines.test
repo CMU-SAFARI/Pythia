@@ -1,0 +1,8 @@
+#!/usr/bin/perl -w
+use Math::Pari;
+use strict;
+
+my $x = PARI(0);
+my $y = eval{$x/$x} || eval {$x**-1};
+1;
+

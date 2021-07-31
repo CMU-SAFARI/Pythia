@@ -1,0 +1,111 @@
+NAME
+    Math::Combinatorics - Perform combinations and permutations on lists
+
+SYNOPSIS
+    Available as an object oriented API.
+
+      use Math::Combinatorics;
+
+      my @n = qw(a b c);
+      my $combinat = Math::Combinatorics->new(count => 2,
+                                              data => [@n],
+                                             );
+
+      print "combinations of 2 from: ".join(" ",@n)."\n";
+      print "------------------------".("--" x scalar(@n))."\n";
+      while(my @combo = $combinat->next_combination){
+        print join(' ', @combo)."\n";
+      }
+
+      print "\n";
+
+      print "combinations of 2 from: ".join(" ",@n)."\n";
+      print "------------------------".("--" x scalar(@n))."\n";
+      while(my @permu = $combinat->next_permutation){
+        print join(' ', @permu)."\n";
+      }
+
+      output:
+
+    Or available via exported functions 'permute', 'combine', and
+    'factorial'.
+
+      use Math::Combinatorics;
+
+      my @n = qw(a b c);
+      print "combinations of 2 from: ".join(" ",@n)."\n";
+      print "------------------------".("--" x scalar(@n))."\n";
+      print join("\n", map { join " ", @$_ } combine(2,@n)),"\n";
+      print "\n";
+      print "permutations of 3 from: ".join(" ",@n)."\n";
+      print "------------------------".("--" x scalar(@n))."\n";
+      print join("\n", map { join " ", @$_ } permute(@n)),"\n";
+
+    Output:
+
+      combinations of 2 from: a b c
+      ------------------------------
+      a b
+      a c
+      b c
+
+      combinations of 2 from: a b c
+      ------------------------------
+      a b c
+      a c b
+      b a c
+      b c a
+      c a b
+      c b a
+
+    Output from both types of calls is the same, but the object-oriented
+    approach consumes much less memory for large sets.
+
+DESCRIPTION
+    Combinatorics is the branch of mathematics studying the enumeration,
+    combination, and permutation of sets of elements and the mathematical
+    relations that characterize their properties. As a jumping off point,
+    refer to:
+
+    http://mathworld.wolfram.com/Combinatorics.html
+
+    This module provides a pure-perl implementation of nCk, nPk, and n!
+    (combination, permutation, and factorial, respectively). Functional and
+    object-oriented usages allow problems such as the following to be
+    solved:
+
+    nCk "Fun questions to ask the pizza parlor wait staff: how many possible
+    combinations of 2 toppings can I get on my pizza?".
+
+    nPk "Master Mind Game: ways to arrange pieces of different colors in a
+    certain number of positions, without repetition of a color".
+
+    Object-oriented usage additionally allows solving these problems by
+    calling the new() entry elsewhere in this document with a frequency
+    vector:
+
+    nPRk "morse signals: diferent signals of 3 positions using the 2 two
+    symbol - and .".
+
+    nCRk "ways to extract 3 balls at once of a bag with black and white
+    balls".
+
+    nPRk "different words obtained permuting the letters of the word
+    PARROT".
+
+AUTHOR
+    Allen Day <allenday@ucla.edu>, with algorithmic contributions from
+    Christopher Eltschka and Tye.
+
+ACKNOWLEDGEMENTS
+    Thanks to everyone for helping to make this a better module.
+
+    For adding new features: Carlos Rica, David Coppit
+
+    For bug reports: Ying Yang, Joerg Beyer, Marc Logghe
+
+LICENSE AND COPYRIGHT
+
+    Copyright (c) 2004 Allen Day. All rights reserved. This program is
+    free software; you can redistribute it and/or modify it under the same
+    terms as Perl itself.

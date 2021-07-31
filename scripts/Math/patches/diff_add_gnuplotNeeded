@@ -1,0 +1,77 @@
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/plotX.c pari-2.3.5/src/graph/plotX.c
+--- pari-2.3.5-patched/src/graph/plotX.c	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/plotX.c	2018-07-29 04:27:52.526783100 -0700
+@@ -19,6 +19,11 @@ Foundation, Inc., 59 Temple Place - Suit
+ /*                                                                 */
+ /*******************************************************************/
+ 
++#ifdef BOTH_GNUPLOT_AND_X11		/* The switch support in plotgnuplot */
++#  define rectdraw0		X11_rectdraw0
++#  define PARI_get_plot		X11_PARI_get_plot
++#endif
++
+ #include "pari.h"
+ #include "rect.h"
+ #include "../language/anal.h"
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/plotport.c pari-2.3.5/src/graph/plotport.c
+--- pari-2.3.5-patched/src/graph/plotport.c	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/plotport.c	2018-07-29 04:27:52.511183000 -0700
+@@ -29,7 +29,7 @@ static void PARI_get_psplot(void);
+ 
+ static long current_color[NUMRECT];
+ PariRect **rectgraph = NULL;
+-PARI_plot pari_plot, pari_psplot;
++PARI_plot pari_plot, pari_psplot, X11_pari_plot;
+ PARI_plot *pari_plot_engine = &pari_plot;
+ long  rectpoint_itype = 0;
+ long  rectline_itype  = 0;
+@@ -769,7 +769,7 @@ void
+ rectpointsize(long ne, GEN size) /* code = ROt_PTS */
+ {
+  if (ne == -1) {
+-     /*do nothing*/
++     set_pointsize(gtodouble(size));	/* Immediate set */
+  } else {
+      PariRect *e = check_rect_init(ne);
+      RectObj *z = (RectObj*) gpmalloc(sizeof(RectObjPS));
+@@ -2133,3 +2133,18 @@ gen_rectdraw0(struct plot_eng *eng, void
+     }
+   }
+ }
++
++#ifndef PLOT_IS_TUNABLE
++long
++term_set(char *s) {
++  if (s && 0 == strcmp(s,"?"))
++    pariputs("plotterm(), plotfile(), or plotpointsize() unsupported by this driver.\n");
++  return 1; 
++}
++
++long
++plot_outfile_set(char *s) { (void)s; return 1; }
++
++void
++set_pointsize(double d) { (void)d; }
++#endif
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/rect.h pari-2.3.5/src/graph/rect.h
+--- pari-2.3.5-patched/src/graph/rect.h	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/rect.h	2018-07-29 04:27:52.526783100 -0700
+@@ -312,4 +312,8 @@ void gen_rectdraw0(struct plot_eng *eng,
+ void  PARI_get_plot(long fatal);
+ void  rectdraw0(long *w, long *x, long *y, long lw);
+ 
++long  plot_outfile_set(char *s);
++void  set_pointsize(double d);
++long  term_set(char *s);
++
+ ENDEXTERN
+--- pari-2.3.5/src/gp/highlvl.h-pre	2010-02-02 08:05:38.000000000 -0800
++++ pari-2.3.5/src/gp/highlvl.h	2018-07-30 12:44:20.698096300 -0700
+@@ -29,6 +29,7 @@ entree functions_highlevel[]={
+ {"plotrpoint",1,(void*)rectrpoint,10,"vLGG","plotrpoint(w,dx,dy): draw a point (and move cursor) at position dx,dy relative to present position of the cursor in rectwindow w"},
+ {"plotscale",1,(void*)rectscale,10,"vLGGGG","plotscale(w,x1,x2,y1,y2): scale the coordinates in rectwindow w so that x goes from x1 to x2 and y from y1 to y2 (y2<y1 is allowed)"},
+ {"plotstring",0,(void*)rectstring3,10,"vLsD0,L,","plotstring(w,x,{flags=0}): draw in rectwindow w the string corresponding to x. Bits 1 and 2 of flag regulate horizontal alignment: left if 0, right if 2, center if 1. Bits 4 and 8 regulate vertical alignment: bottom if 0, top if 8, v-center if 4. Can insert additional gap between point and string: horizontal if bit 16 is set, vertical if bit 32 is set"},
++{"plotterm",16,(void*)term_set,10,"ls","plotterm(\"termname\"): set terminal to plot in high resolution to. Ignored by some drivers. In gnuplot driver possible terminals are the same as in gnuplot, terminal options can be put after the terminal name and space; terminal size can be put immediately after the name, as in \"gif=300,200\". If term is \"?\", lists possible values. Positive return value means success"},
+ {"psdraw",0,(void*)postdraw_flag,10,"vGD0,L,","psdraw(list, {flag=0}): same as plotdraw, except that the output is a postscript program in psfile (pari.ps by default), and flag!=0 scales the plot from size of the current output device to the standard postscript plotting size"},
+ {"psploth",0,(void*)postploth,10,"V=GGIpD0,L,D0,L,","psploth(X=a,b,expr,{flags=0},{n=0}): same as ploth, except that the output is a postscript program in psfile (pari.ps by default)"},
+ {"psplothraw",0,(void*)postplothraw,10,"GGD0,L,","psplothraw(listx,listy,{flag=0}): same as plothraw, except that the output is a postscript program in psfile (pari.ps by default)"},

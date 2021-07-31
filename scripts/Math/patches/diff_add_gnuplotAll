@@ -1,0 +1,154 @@
+diff --strip-trailing-cr -pru pari-2.3.5-patched/README.os2 pari-2.3.5/README.os2
+--- pari-2.3.5-patched/README.os2	2010-02-03 14:59:23.000000000 -0800
++++ pari-2.3.5/README.os2	2018-07-29 04:27:52.479983000 -0700
+@@ -29,14 +29,13 @@ a convenience, but also statically linke
+ sigh...
+ 
+ To use the gnuplot-engine DLL gnpltdrw.DLL, one can give Configure the option
+---graphic=gnuplot-dynamic,gnpltdrw (requires linking with -Zcrtdll for graphics
+-to work).  Add -DOLD_SET_FEEDBACK_RECTANGLE gcc option if gnpltdrw.DLL supports
++--graphic=gnuplot.dynamic,gnpltdrw (requires linking with -Zcrtdll for graphics
++to work).  Add -DUSE_SET_FEEDBACK_RECTANGLE gcc option if gnpltdrw.DLL supports
+ mousing, but is an old build, so it won't report this capability.
+ 
+ Thus the build process may look like this:
+ 
+-  sh Configure --graphic=gnuplot-dynamic,gnpltdrw
+-  make gp
++  sh Configure --graphic=gnuplot.dynamic,gnpltdrw
+   cd Oos2-ix86
+   make _O=.obj _A=.lib CC_FLAVOR="-Zomf -Zcrtdll -Zstack 8192 -DUSE_SET_FEEDBACK_RECTANGLE" RLLIBS=-lreadline_import DLLD_IGNORE= AR=emxomfar bench
+   cd ..
+diff --strip-trailing-cr -pru pari-2.3.5-patched/config/Makefile.SH pari-2.3.5/config/Makefile.SH
+--- pari-2.3.5-patched/config/Makefile.SH	2010-01-09 09:59:48.000000000 -0800
++++ pari-2.3.5/config/Makefile.SH	2018-07-29 04:27:52.511183000 -0700
+@@ -63,12 +63,26 @@ fltk)
+   PLOTLIBS="-L\$(FLTKDIR)/lib -lfltk $FLTK_LIBS"
+   postconfig='-fltk-config --post '
+   graph=plotfltk;;
++*gnuplot.dynamic*)
++  graphic_lib_dll=NULL
++  case "$which_graphic_lib" in
++  *,*)
++      graphic_lib_dll='\"'`echo "$which_graphic_lib" | sed -e 's/[-a-z.+]*,//'`'\"'
++      which_graphic_lib=`echo "$which_graphic_lib" | sed -e 's/,.*//'` ;;
++  esac
++  CFLAGS="$CFLAGS -DPLOT_IS_TUNABLE"	# For plotport.c
++  PLOTCFLAGS="-DDYNAMIC_PLOTTING -DDYNAMIC_PLOTTING_RUNTIME_LINK=$graphic_lib_dll"
++  PLOTLIBS="-L\$(QTDIR)/lib $QTLIB"
++  graph=plotgnuplot;;
+ esac
+ graph="plotport $graph"
+ 
+ plotrunpath=
+ case "$which_graphic_lib" in
+   *X11*)
++    case "$which_graphic_lib" in
++      *gnuplot*) PLOTCFLAGS="$PLOTCFLAGS -DBOTH_GNUPLOT_AND_X11" ;;
++    esac
+     PLOTCFLAGS="$PLOTCFLAGS $X11_INC"
+     PLOTLIBS="$PLOTLIBS $X11_LIBS"
+     plotrunpath=$X11
+diff --strip-trailing-cr -pru pari-2.3.5-patched/config/get_fltk pari-2.3.5/config/get_fltk
+--- pari-2.3.5-patched/config/get_fltk	2008-03-31 04:43:59.000000000 -0700
++++ pari-2.3.5/config/get_fltk	2018-07-29 04:27:52.495583000 -0700
+@@ -2,7 +2,7 @@ if test -z "$with_fltk"; then
+   case "$which_graphic_lib" in
+     fltk) with_fltk=yes;;
+   esac
+-  if test -z "$X11"; then with_fltk=yes; fi
++  if test -z "$X11" -a "X$which_graphic_lib" = "Xnone"; then with_fltk=yes; fi
+ fi
+ if test -n "$with_fltk"; then
+   which_graphic_lib=fltk
+diff --strip-trailing-cr -pru pari-2.3.5-patched/config/get_graphic_lib pari-2.3.5/config/get_graphic_lib
+--- pari-2.3.5-patched/config/get_graphic_lib	2008-03-31 04:43:59.000000000 -0700
++++ pari-2.3.5/config/get_graphic_lib	2018-07-29 04:27:52.495583000 -0700
+@@ -2,13 +2,18 @@ case $which_graphic_lib in
+   auto) which_graphic_lib=none;;
+ esac
+ if test "$fastread" != yes; then
++  case "X$X11" in
++  X)   ;;
++  *)   add_graph="   builtin.X11+gnuplot.dynamic" ;;
++  esac
+   cat << EOT
+ ==========================================================================
+ GP contains high resolution plotting functions. Choose among
+-       none       X11       fltk      Qt
++  none   X11   fltk   Qt   gnuplot.dynamic$add_graph
++The '*-dynamic' version may be trailed by ',dll_base_name'.
+ EOT
+   echo $n ..."Use which graphic library (\"none\" means no hi-res plot) ? $c"
+-  rep="none X11 fltk Qt";
++  rep="none X11 fltk Qt$add_graph gnuplot.dynamic";
+   dflt=$which_graphic_lib; . ./myread
+   which_graphic_lib=$ans
+ 
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/plotX.c pari-2.3.5/src/graph/plotX.c
+--- pari-2.3.5-patched/src/graph/plotX.c	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/plotX.c	2018-07-29 04:27:52.526783100 -0700
+@@ -19,6 +19,11 @@ Foundation, Inc., 59 Temple Place - Suit
+ /*                                                                 */
+ /*******************************************************************/
+ 
++#ifdef BOTH_GNUPLOT_AND_X11		/* The switch support in plotgnuplot */
++#  define rectdraw0		X11_rectdraw0
++#  define PARI_get_plot		X11_PARI_get_plot
++#endif
++
+ #include "pari.h"
+ #include "rect.h"
+ #include "../language/anal.h"
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/plotport.c pari-2.3.5/src/graph/plotport.c
+--- pari-2.3.5-patched/src/graph/plotport.c	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/plotport.c	2018-07-29 04:27:52.511183000 -0700
+@@ -29,7 +29,7 @@ static void PARI_get_psplot(void);
+ 
+ static long current_color[NUMRECT];
+ PariRect **rectgraph = NULL;
+-PARI_plot pari_plot, pari_psplot;
++PARI_plot pari_plot, pari_psplot, X11_pari_plot;
+ PARI_plot *pari_plot_engine = &pari_plot;
+ long  rectpoint_itype = 0;
+ long  rectline_itype  = 0;
+@@ -769,7 +769,7 @@ void
+ rectpointsize(long ne, GEN size) /* code = ROt_PTS */
+ {
+  if (ne == -1) {
+-     /*do nothing*/
++     set_pointsize(gtodouble(size));	/* Immediate set */
+  } else {
+      PariRect *e = check_rect_init(ne);
+      RectObj *z = (RectObj*) gpmalloc(sizeof(RectObjPS));
+@@ -2133,3 +2133,18 @@ gen_rectdraw0(struct plot_eng *eng, void
+     }
+   }
+ }
++
++#ifndef PLOT_IS_TUNABLE
++long
++term_set(char *s) {
++  if (s && 0 == strcmp(s,"?"))
++    pariputs("plotterm(), plotfile(), or plotpointsize() unsupported by this driver.\n");
++  return 1; 
++}
++
++long
++plot_outfile_set(char *s) { (void)s; return 1; }
++
++void
++set_pointsize(double d) { (void)d; }
++#endif
+diff --strip-trailing-cr -pru pari-2.3.5-patched/src/graph/rect.h pari-2.3.5/src/graph/rect.h
+--- pari-2.3.5-patched/src/graph/rect.h	2008-03-31 04:43:58.000000000 -0700
++++ pari-2.3.5/src/graph/rect.h	2018-07-29 04:27:52.526783100 -0700
+@@ -312,4 +312,8 @@ void gen_rectdraw0(struct plot_eng *eng,
+ void  PARI_get_plot(long fatal);
+ void  rectdraw0(long *w, long *x, long *y, long lw);
+ 
++long  plot_outfile_set(char *s);
++void  set_pointsize(double d);
++long  term_set(char *s);
++
+ ENDEXTERN

@@ -1,0 +1,23 @@
+--- pari-2.5.0/src/headers/parisys.h-pre	2011-05-30 02:28:34.000000000 -0700
++++ pari-2.5.0/src/headers/parisys.h	2019-02-27 02:46:33.888574100 -0800
+@@ -82,3 +82,8 @@ ENDEXTERN
+ #else
+ #define CHECK_CTRLC
+ #endif
++
++#define aOPTas__(what)		__attribute__((optimize(what)))
++#define aOPTas__Og		aOPTas__("Og")
++#define aOPTas__O0		aOPTas__("O0")
++#define aOPTas__O1		aOPTas__("O1")
+--- pari-2.5.0/src/basemath/bibli2.c-pre	2011-05-30 02:28:33.000000000 -0700
++++ pari-2.5.0/src/basemath/bibli2.c	2019-02-27 04:03:17.398259900 -0800
+@@ -1388,6 +1388,9 @@ closurecmp(void *data, GEN x, GEN y)
+ #define cmp_LEX 2
+ #define cmp_REV 4
+ #define cmp_UNIQ 8
++#ifdef aOPT__vecsort0
++		aOPT__vecsort0
++#endif
+ GEN
+ vecsort0(GEN x, GEN k, long flag)
+ {

@@ -1,0 +1,5 @@
+Core_0_IPC : sum
+Core_0_LLC_total_miss : sum
+Core_0_LLC_load_miss : sum
+Core_0_LLC_RFO_miss : sum
+Core_0_LLC_writeback_miss : sum

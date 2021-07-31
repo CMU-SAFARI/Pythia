@@ -1,0 +1,72 @@
+set path=<<<dir>>>\msys\1.0\bin;%path%
+sh ./Configure --without-gmp --with-qt=no 2>&1 | tee -a 00c00
+
+	Replace paricfg.h by the Math::Pari version (with PARIVERSION PARIINFO added for gp.c)
+	Change DOTEST line to have 64 in <<<arch>>>/Makefile.
+		With plotting patch: plotterm should have Unixified line-endings.
+
+make -k bench 2>&1 | tee -a 00t00
+
+  The only problem: install()
+
+--- pari-2.3.5/src/language/init.c-pre	2019-03-28 21:32:27.308266800 -0700
++++ pari-2.3.5/src/language/init.c	2019-03-28 21:43:52.938482600 -0700
+@@ -19,15 +19,16 @@ Foundation, Inc., 59 Temple Place - Suit
+ /*                                                                 */
+ /*******************************************************************/
+ #include <string.h>
+-#include "pari.h"
+-#include "paripriv.h"
+-#include "anal.h"
+ #ifdef _WIN32
+ #  ifndef WINCE
+ #    include <process.h>
+ #  endif
+ #endif
+ 
++#include "pari.h"
++#include "paripriv.h"
++#include "anal.h"
++
+ GEN     gnil, gen_0, gen_1, gen_m1, gen_2, ghalf, gi;
+ GEN     gpi, geuler, bernzone;
+ GEN     primetab; /* private primetable */
+--- pari-2.3.5/src/language/es.c-pre	2019-03-28 21:32:27.193260200 -0700
++++ pari-2.3.5/src/language/es.c	2019-03-28 21:40:33.206058600 -0700
+@@ -18,6 +18,13 @@ Foundation, Inc., 59 Temple Place - Suit
+ /**                 INPUT/OUTPUT SUBROUTINES                      **/
+ /**                                                               **/
+ /*******************************************************************/
++#ifdef HAS_STAT
++#include <sys/stat.h>
++#endif
++#ifdef HAS_OPENDIR
++#include <dirent.h>
++#endif
++
+ #include "pari.h"
+ #include "paripriv.h"
+ #include "anal.h"
+--- pari-2.3.5/src/headers/parigen.h-pre	2019-03-28 21:32:25.971190300 -0700
++++ pari-2.3.5/src/headers/parigen.h	2019-03-28 21:36:03.087608700 -0700
+@@ -15,8 +15,19 @@ Foundation, Inc., 59 Temple Place - Suit
+ 
+ /* This file defines the parameters of the GEN type               */
+ 
+-typedef long *GEN;
++#ifdef _WIN64
++typedef unsigned long long pari_ulong;
++#define long long long
++#define labs llabs
++#define atol atoll
++#define atoul atoull
++#define strtol strtoll
++#define strtoul strtoull
++#else
+ typedef unsigned long pari_ulong;
++#endif
++
++typedef long *GEN;
+ #define ulong pari_ulong
+ 
+ #ifdef LONG_IS_64BIT

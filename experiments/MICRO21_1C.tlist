@@ -1,0 +1,599 @@
+NAME=403.gcc-16B
+TRACE=/insert/your/path/here/403.gcc-16B.champsimtrace.xz
+KNOBS=
+
+NAME=410.bwaves-1963B
+TRACE=/insert/your/path/here/410.bwaves-1963B.champsimtrace.xz
+KNOBS=
+
+NAME=429.mcf-184B
+TRACE=/insert/your/path/here/429.mcf-184B.champsimtrace.xz
+KNOBS=
+
+NAME=429.mcf-192B
+TRACE=/insert/your/path/here/429.mcf-192B.champsimtrace.xz
+KNOBS=
+
+NAME=429.mcf-51B
+TRACE=/insert/your/path/here/429.mcf-51B.champsimtrace.xz
+KNOBS=
+
+NAME=433.milc-127B
+TRACE=/insert/your/path/here/433.milc-127B.champsimtrace.xz
+KNOBS=
+
+NAME=436.cactusADM-1804B
+TRACE=/insert/your/path/here/436.cactusADM-1804B.champsimtrace.xz
+KNOBS=
+
+NAME=437.leslie3d-149B
+TRACE=/insert/your/path/here/437.leslie3d-149B.champsimtrace.xz
+KNOBS=
+
+NAME=437.leslie3d-232B
+TRACE=/insert/your/path/here/437.leslie3d-232B.champsimtrace.xz
+KNOBS=
+
+NAME=437.leslie3d-265B
+TRACE=/insert/your/path/here/437.leslie3d-265B.champsimtrace.xz
+KNOBS=
+
+NAME=437.leslie3d-271B
+TRACE=/insert/your/path/here/437.leslie3d-271B.champsimtrace.xz
+KNOBS=
+
+NAME=445.gobmk-30B
+TRACE=/insert/your/path/here/445.gobmk-30B.champsimtrace.xz
+KNOBS=
+
+NAME=445.gobmk-36B
+TRACE=/insert/your/path/here/445.gobmk-36B.champsimtrace.xz
+KNOBS=
+
+NAME=450.soplex-247B
+TRACE=/insert/your/path/here/450.soplex-247B.champsimtrace.xz
+KNOBS=
+
+NAME=459.GemsFDTD-1211B
+TRACE=/insert/your/path/here/459.GemsFDTD-1211B.champsimtrace.xz
+KNOBS=
+
+NAME=459.GemsFDTD-1418B
+TRACE=/insert/your/path/here/459.GemsFDTD-1418B.champsimtrace.xz
+KNOBS=
+
+NAME=459.GemsFDTD-765B
+TRACE=/insert/your/path/here/459.GemsFDTD-765B.champsimtrace.xz
+KNOBS=
+
+NAME=462.libquantum-1343B
+TRACE=/insert/your/path/here/462.libquantum-1343B.champsimtrace.xz
+KNOBS=
+
+NAME=462.libquantum-714B
+TRACE=/insert/your/path/here/462.libquantum-714B.champsimtrace.xz
+KNOBS=
+
+NAME=470.lbm-1274B
+TRACE=/insert/your/path/here/470.lbm-1274B.champsimtrace.xz
+KNOBS=
+
+NAME=471.omnetpp-188B
+TRACE=/insert/your/path/here/471.omnetpp-188B.champsimtrace.xz
+KNOBS=
+
+NAME=473.astar-359B
+TRACE=/insert/your/path/here/473.astar-359B.champsimtrace.xz
+KNOBS=
+
+NAME=481.wrf-1254B
+TRACE=/insert/your/path/here/481.wrf-1254B.champsimtrace.xz
+KNOBS=
+
+NAME=481.wrf-196B
+TRACE=/insert/your/path/here/481.wrf-196B.champsimtrace.xz
+KNOBS=
+
+NAME=481.wrf-816B
+TRACE=/insert/your/path/here/481.wrf-816B.champsimtrace.xz
+KNOBS=
+
+NAME=482.sphinx3-1297B
+TRACE=/insert/your/path/here/482.sphinx3-1297B.champsimtrace.xz
+KNOBS=
+
+NAME=482.sphinx3-1395B
+TRACE=/insert/your/path/here/482.sphinx3-1395B.champsimtrace.xz
+KNOBS=
+
+NAME=483.xalancbmk-127B
+TRACE=/insert/your/path/here/483.xalancbmk-127B.champsimtrace.xz
+KNOBS=
+
+NAME=602.gcc_s-1850B
+TRACE=/insert/your/path/here/602.gcc_s-1850B.champsimtrace.xz
+KNOBS=
+
+NAME=602.gcc_s-734B
+TRACE=/insert/your/path/here/602.gcc_s-734B.champsimtrace.xz
+KNOBS=
+
+NAME=603.bwaves_s-2931B
+TRACE=/insert/your/path/here/603.bwaves_s-2931B.champsimtrace.xz
+KNOBS=
+
+NAME=605.mcf_s-994B
+TRACE=/insert/your/path/here/605.mcf_s-994B.champsimtrace.xz
+KNOBS=
+
+NAME=607.cactuBSSN_s-2421B
+TRACE=/insert/your/path/here/607.cactuBSSN_s-2421B.champsimtrace.xz
+KNOBS=
+
+NAME=619.lbm_s-2677B
+TRACE=/insert/your/path/here/619.lbm_s-2677B.champsimtrace.xz
+KNOBS=
+
+NAME=619.lbm_s-3766B
+TRACE=/insert/your/path/here/619.lbm_s-3766B.champsimtrace.xz
+KNOBS=
+
+NAME=619.lbm_s-4268B
+TRACE=/insert/your/path/here/619.lbm_s-4268B.champsimtrace.xz
+KNOBS=
+
+NAME=620.omnetpp_s-141B
+TRACE=/insert/your/path/here/620.omnetpp_s-141B.champsimtrace.xz
+KNOBS=
+
+NAME=620.omnetpp_s-874B
+TRACE=/insert/your/path/here/620.omnetpp_s-874B.champsimtrace.xz
+KNOBS=
+
+NAME=621.wrf_s-6673B
+TRACE=/insert/your/path/here/621.wrf_s-6673B.champsimtrace.xz
+KNOBS=
+
+NAME=621.wrf_s-8065B
+TRACE=/insert/your/path/here/621.wrf_s-8065B.champsimtrace.xz
+KNOBS=
+
+NAME=623.xalancbmk_s-10B
+TRACE=/insert/your/path/here/623.xalancbmk_s-10B.champsimtrace.xz
+KNOBS=
+
+NAME=623.xalancbmk_s-592B
+TRACE=/insert/your/path/here/623.xalancbmk_s-592B.champsimtrace.xz
+KNOBS=
+
+NAME=627.cam4_s-573B
+TRACE=/insert/your/path/here/627.cam4_s-573B.champsimtrace.xz
+KNOBS=
+
+NAME=628.pop2_s-17B
+TRACE=/insert/your/path/here/628.pop2_s-17B.champsimtrace.xz
+KNOBS=
+
+NAME=649.fotonik3d_s-10881B
+TRACE=/insert/your/path/here/649.fotonik3d_s-10881B.champsimtrace.xz
+KNOBS=
+
+NAME=654.roms_s-1007B
+TRACE=/insert/your/path/here/654.roms_s-1007B.champsimtrace.xz
+KNOBS=
+
+NAME=ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_26750M.length_250M
+TRACE=/insert/your/path/here/ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_26750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M
+TRACE=/insert/your/path/here/ligra_BC.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_1750M.length_250M
+TRACE=/insert/your/path/here/ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_1750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_4000M.length_250M
+TRACE=/insert/your/path/here/ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_4000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_7500M.length_250M
+TRACE=/insert/your/path/here/ligra_BellmanFord.com-lj.ungraph.gcc_6.3.0_O3.drop_7500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS-Bitvector.com-lj.ungraph.gcc_6.3.0_O3.drop_23000M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS-Bitvector.com-lj.ungraph.gcc_6.3.0_O3.drop_23000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS-Bitvector.com-lj.ungraph.gcc_6.3.0_O3.drop_2500M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS-Bitvector.com-lj.ungraph.gcc_6.3.0_O3.drop_2500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_22000M.length_250M
+TRACE=/insert/your/path/here/ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_22000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_5000M.length_250M
+TRACE=/insert/your/path/here/ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_5000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M
+TRACE=/insert/your/path/here/ligra_BFSCC.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_21500M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_21500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_5000M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_5000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M
+TRACE=/insert/your/path/here/ligra_BFS.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_CF.com-lj.ungraph.gcc_6.3.0_O3.drop_184750M.length_250M
+TRACE=/insert/your/path/here/ligra_CF.com-lj.ungraph.gcc_6.3.0_O3.drop_184750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_CF.com-lj.ungraph.gcc_6.3.0_O3.drop_2500M.length_250M
+TRACE=/insert/your/path/here/ligra_CF.com-lj.ungraph.gcc_6.3.0_O3.drop_2500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_22750M.length_250M
+TRACE=/insert/your/path/here/ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_22750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M
+TRACE=/insert/your/path/here/ligra_Components.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Components-Shortcut.com-lj.ungraph.gcc_6.3.0_O3.drop_22000M.length_250M
+TRACE=/insert/your/path/here/ligra_Components-Shortcut.com-lj.ungraph.gcc_6.3.0_O3.drop_22000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Components-Shortcut.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M
+TRACE=/insert/your/path/here/ligra_Components-Shortcut.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_21250M.length_250M
+TRACE=/insert/your/path/here/ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_21250M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M
+TRACE=/insert/your/path/here/ligra_MIS.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_21750M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_21750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_51000M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_51000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_60750M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_60750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_79500M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRank.com-lj.ungraph.gcc_6.3.0_O3.drop_79500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_1250M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_1250M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_24000M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_24000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_24500M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_24500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_PageRankDelta.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Radii.com-lj.ungraph.gcc_6.3.0_O3.drop_32000M.length_250M
+TRACE=/insert/your/path/here/ligra_Radii.com-lj.ungraph.gcc_6.3.0_O3.drop_32000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Radii.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_Radii.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_25000M.length_250M
+TRACE=/insert/your/path/here/ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_25000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M
+TRACE=/insert/your/path/here/ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_3500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M
+TRACE=/insert/your/path/here/ligra_Triangle.com-lj.ungraph.gcc_6.3.0_O3.drop_750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.canneal.simlarge.prebuilt.drop_1250M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.canneal.simlarge.prebuilt.drop_1250M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.canneal.simlarge.prebuilt.drop_3000M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.canneal.simlarge.prebuilt.drop_3000M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.canneal.simlarge.prebuilt.drop_4500M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.canneal.simlarge.prebuilt.drop_4500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.canneal.simlarge.prebuilt.drop_4750M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.canneal.simlarge.prebuilt.drop_4750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.canneal.simlarge.prebuilt.drop_500M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.canneal.simlarge.prebuilt.drop_500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.facesim.simlarge.prebuilt.drop_1500M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.facesim.simlarge.prebuilt.drop_1500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.fluidanimate.simlarge.prebuilt.drop_9500M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.fluidanimate.simlarge.prebuilt.drop_9500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.streamcluster.simlarge.prebuilt.drop_0M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.streamcluster.simlarge.prebuilt.drop_0M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.streamcluster.simlarge.prebuilt.drop_14750M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.streamcluster.simlarge.prebuilt.drop_14750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.raytrace.simlarge.prebuilt.drop_23500M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.raytrace.simlarge.prebuilt.drop_23500M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=parsec_2.1.raytrace.simlarge.prebuilt.drop_23750M.length_250M
+TRACE=/insert/your/path/here/parsec_2.1.raytrace.simlarge.prebuilt.drop_23750M.length_250M.champsimtrace.xz
+KNOBS=--warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase0_core0
+TRACE=/insert/your/path/here/cassandra_phase0_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase0_core1
+TRACE=/insert/your/path/here/cassandra_phase0_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase0_core2
+TRACE=/insert/your/path/here/cassandra_phase0_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase0_core3
+TRACE=/insert/your/path/here/cassandra_phase0_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase1_core0
+TRACE=/insert/your/path/here/cassandra_phase1_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase1_core1
+TRACE=/insert/your/path/here/cassandra_phase1_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase1_core2
+TRACE=/insert/your/path/here/cassandra_phase1_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase1_core3
+TRACE=/insert/your/path/here/cassandra_phase1_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase2_core1
+TRACE=/insert/your/path/here/cassandra_phase2_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase2_core2
+TRACE=/insert/your/path/here/cassandra_phase2_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase2_core3
+TRACE=/insert/your/path/here/cassandra_phase2_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase3_core1
+TRACE=/insert/your/path/here/cassandra_phase3_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase3_core3
+TRACE=/insert/your/path/here/cassandra_phase3_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase4_core0
+TRACE=/insert/your/path/here/cassandra_phase4_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase4_core2
+TRACE=/insert/your/path/here/cassandra_phase4_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase4_core3
+TRACE=/insert/your/path/here/cassandra_phase4_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase5_core0
+TRACE=/insert/your/path/here/cassandra_phase5_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase5_core1
+TRACE=/insert/your/path/here/cassandra_phase5_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase5_core2
+TRACE=/insert/your/path/here/cassandra_phase5_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cassandra_phase5_core3
+TRACE=/insert/your/path/here/cassandra_phase5_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=cloud9_phase5_core2
+TRACE=/insert/your/path/here/cloud9_phase5_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase0_core0
+TRACE=/insert/your/path/here/nutch_phase0_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase0_core1
+TRACE=/insert/your/path/here/nutch_phase0_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase0_core2
+TRACE=/insert/your/path/here/nutch_phase0_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase0_core3
+TRACE=/insert/your/path/here/nutch_phase0_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase1_core0
+TRACE=/insert/your/path/here/nutch_phase1_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase1_core1
+TRACE=/insert/your/path/here/nutch_phase1_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase1_core2
+TRACE=/insert/your/path/here/nutch_phase1_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase1_core3
+TRACE=/insert/your/path/here/nutch_phase1_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase3_core0
+TRACE=/insert/your/path/here/nutch_phase3_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase3_core1
+TRACE=/insert/your/path/here/nutch_phase3_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase3_core2
+TRACE=/insert/your/path/here/nutch_phase3_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase3_core3
+TRACE=/insert/your/path/here/nutch_phase3_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase4_core0
+TRACE=/insert/your/path/here/nutch_phase4_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase4_core1
+TRACE=/insert/your/path/here/nutch_phase4_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase4_core2
+TRACE=/insert/your/path/here/nutch_phase4_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=nutch_phase4_core3
+TRACE=/insert/your/path/here/nutch_phase4_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase0_core1
+TRACE=/insert/your/path/here/streaming_phase0_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase1_core0
+TRACE=/insert/your/path/here/streaming_phase1_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase1_core1
+TRACE=/insert/your/path/here/streaming_phase1_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase1_core3
+TRACE=/insert/your/path/here/streaming_phase1_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase2_core0
+TRACE=/insert/your/path/here/streaming_phase2_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase2_core1
+TRACE=/insert/your/path/here/streaming_phase2_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase2_core2
+TRACE=/insert/your/path/here/streaming_phase2_core2.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase2_core3
+TRACE=/insert/your/path/here/streaming_phase2_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase3_core0
+TRACE=/insert/your/path/here/streaming_phase3_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase3_core1
+TRACE=/insert/your/path/here/streaming_phase3_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase3_core3
+TRACE=/insert/your/path/here/streaming_phase3_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase4_core0
+TRACE=/insert/your/path/here/streaming_phase4_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase4_core1
+TRACE=/insert/your/path/here/streaming_phase4_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase4_core3
+TRACE=/insert/your/path/here/streaming_phase4_core3.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase5_core0
+TRACE=/insert/your/path/here/streaming_phase5_core0.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000
+
+NAME=streaming_phase5_core1
+TRACE=/insert/your/path/here/streaming_phase5_core1.trace.xz
+KNOBS=--knob_cloudsuite=true --warmup_instructions=100000000 --simulation_instructions=150000000

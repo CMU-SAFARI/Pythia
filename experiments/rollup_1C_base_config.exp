@@ -1,0 +1,27 @@
+##############################################################
+##
+## This file contains all the experiments required
+## to reproduce single-core performance results of Pythia.
+##
+## Please follow the README to know how to use this file.
+## 
+## Owner: Rahul Bera (write2bera@gmail.com)
+##
+###############################################################
+
+
+# configurations
+BASE = --warmup_instructions=100000000 --simulation_instructions=500000000
+NOPREF = --config=/mnt/panzer/rahbera/ChampSim/config/nopref.ini
+STRIDE = --l2c_prefetcher_types=stride --config=/mnt/panzer/rahbera/ChampSim/config/stride.ini
+SPP_DEV2 = --l2c_prefetcher_types=spp_dev2 --config=/mnt/panzer/rahbera/ChampSim/config/spp_dev2.ini
+MLOP = --l2c_prefetcher_types=mlop --config=/mnt/panzer/rahbera/ChampSim/config/mlop.ini
+BINGO = --l2c_prefetcher_types=bingo --config=/mnt/panzer/rahbera/ChampSim/config/bingo.ini
+PYTHIA = --l2c_prefetcher_types=scooby --config=/mnt/panzer/rahbera/ChampSim/config/pythia.ini
+
+# experiments for Figure 10(a) and Figure 8
+nopref						$(BASE) $(NOPREF)
+spp						$(BASE) $(SPP_DEV2)
+bingo						$(BASE) $(BINGO)
+mlop						$(BASE) $(MLOP)
+pythia						$(BASE) $(PYTHIA)
