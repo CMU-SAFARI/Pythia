@@ -1,0 +1,42 @@
+##############################################################
+##
+## This file contains all the experiments required
+## to reproduce single-core performance results of Pythia.
+##
+## Please follow the README to know how to use this file.
+## 
+## Owner: Rahul Bera (write2bera@gmail.com)
+##
+###############################################################
+
+
+# configurations
+BASE = --warmup_instructions=100000000 --simulation_instructions=500000000
+NOPREF = --config=/insert/your/path/here/nopref.ini
+STRIDE = --l2c_prefetcher_types=stride --config=/insert/your/path/here/stride_MICRO21.ini
+SMS = --l2c_prefetcher_types=sms --config=/insert/your/path/here/sms_MICRO21.ini
+SPP_DEV2 = --l2c_prefetcher_types=spp_dev2 --config=/insert/your/path/here/spp_dev2_MICRO21.ini
+SPP_PPF_DEV = --l2c_prefetcher_types=spp_ppf_dev --config=/insert/your/path/here/spp_ppf_dev_MICRO21.ini
+MLOP = --l2c_prefetcher_types=mlop --config=/insert/your/path/here/mlop_MICRO21.ini
+BINGO = --l2c_prefetcher_types=bingo --config=/insert/your/path/here/bingo_MICRO21.ini
+DSPATCH = --l2c_prefetcher_types=dspatch --config=/insert/your/path/here/dspatch_MICRO21.ini
+IPCP_NEW = --l1d_prefetcher_types=ipcp --l2c_prefetcher_types=ipcp
+POWER7 = --l2c_prefetcher_types=power7 --config=/insert/your/path/here/power7_MICRO21.ini
+PYTHIA = --l2c_prefetcher_types=scooby --config=/insert/your/path/here/pythia_MICRO21.ini
+STRIDE_AT_L1 = --l1d_prefetcher_types=stride --config=/insert/your/path/here/stride_MICRO21.ini
+
+# experiments
+nopref						$(BASE) $(NOPREF)
+perfect_L1					$(BASE) --l1d_perfect=true
+perfect_L2					$(BASE) --l2c_perfect=true
+semi_perfect_L2					$(BASE) --l2c_semi_perfect=true
+stride						$(BASE) $(STRIDE)
+sms						$(BASE) $(SMS)
+spp_dspatch					$(BASE) $(SPP_DEV2) $(DSPATCH)
+spp_bingo					$(BASE) $(SPP_DEV2) $(BINGO) --bingo_pht_size=4096
+stride_spp					$(BASE) $(STRIDE) $(SPP_DEV2)
+stride_spp_bingo				$(BASE) $(STRIDE) $(SPP_DEV2) $(BINGO)
+stride_spp_bingo_dspatch			$(BASE) $(STRIDE) $(SPP_DEV2) $(BINGO) $(DSPATCH)
+stride_spp_bingo_dspatch_mlop			$(BASE) $(STRIDE) $(SPP_DEV2) $(BINGO) $(DSPATCH) $(MLOP)
+ipcp_L1_L2					$(BASE) $(IPCP_NEW)
+power7						$(BASE) $(POWER7)
