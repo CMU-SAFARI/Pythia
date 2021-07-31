@@ -26,7 +26,10 @@
     <li><a href="#about-the-framework">About the Framework</a></li>
     <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#installation">Installation</a></li>
-    <li><a href="#downloading-traces">Downloading Traces</a></li>
+    <li><a href="#preparing-traces">Preparing Traces</a></li>
+    <ul>
+      <li><a href="#more-traces">More Traces</a></li>
+    </ul>
     <li><a href="#experimental-workflow">Experimental Workflow</a></li>
       <ul>
         <li><a href="#launching-experiments">Launching Experiments</a></li>
