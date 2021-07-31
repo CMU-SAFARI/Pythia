@@ -12,12 +12,12 @@
 
 # configurations
 BASE = --warmup_instructions=100000000 --simulation_instructions=500000000
-NOPREF = --config=/insert/your/path/here/nopref.ini
-STRIDE = --l2c_prefetcher_types=stride --config=/insert/your/path/here/stride.ini
-SPP_DEV2 = --l2c_prefetcher_types=spp_dev2 --config=/insert/your/path/here/spp_dev2.ini
-MLOP = --l2c_prefetcher_types=mlop --config=/insert/your/path/here/mlop.ini
-BINGO = --l2c_prefetcher_types=bingo --config=/insert/your/path/here/bingo.ini
-PYTHIA = --l2c_prefetcher_types=scooby --config=/insert/your/path/here/pythia.ini
+NOPREF = --config=$(PYTHIA_HOME)/config/nopref.ini
+STRIDE = --l2c_prefetcher_types=stride --config=$(PYTHIA_HOME)/config/stride.ini
+SPP_DEV2 = --l2c_prefetcher_types=spp_dev2 --config=$(PYTHIA_HOME)/config/spp_dev2.ini
+MLOP = --l2c_prefetcher_types=mlop --config=$(PYTHIA_HOME)/config/mlop.ini
+BINGO = --l2c_prefetcher_types=bingo --config=$(PYTHIA_HOME)/config/bingo.ini
+PYTHIA = --l2c_prefetcher_types=scooby --config=$(PYTHIA_HOME)/config/pythia.ini
 
 nopref						$(BASE) $(NOPREF)
 spp						$(BASE) $(SPP_DEV2)
