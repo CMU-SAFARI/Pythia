@@ -7,8 +7,8 @@
 </p>
 
 <p align="center">
-    <!-- <a href="https://circleci.com/gh/rahulbera/Pythia">
-        <img alt="Build" src="https://img.shields.io/circleci/build/github/rahulbera/Pythia/master">
+    <!-- <a href="https://circleci.com/gh/rahulbera/Pythia-HDL">
+        <img alt="Build" src="https://img.shields.io/circleci/build/github/rahulbera/Pythia-HDL/master">
     </a> -->
     <a href="https://github.com/rahulbera/Pythia/blob/master/LICENSE">
         <img alt="GitHub" src="https://img.shields.io/badge/License-MIT-yellow.svg">
@@ -36,6 +36,7 @@
         <li><a href="#rolling-up-statistics">Rolling up Statistics</a></li>
       </ul>
     </li>
+    <li><a href="#hdl-implementation">HDL Implementation</a></li>
     <li><a href="#citation">Citation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -47,9 +48,7 @@
 
 > Pythia is a hardware-realizable, light-weight data prefetcher that uses reinforcement learning to generate accurate, timely, and system-aware prefetch requests. 
 
-Over the last three decades, researchers have proposed numerous hardware prefetching techniques, most of which rely on exploiting one specific type of program context information (e.g., PC, cacheline delta) to predict future memory accesses. These techniques either neglect a prefetcher’s adversarial side-effects on the overall system (e.g., memory bandwidth utilization) while predicting memory accesses or disjunctly incorporate system awareness on top of the underlying prefetch algorithm. 
-
-Here we propose Pythia, which formulates the prefetcher as a reinforcement learning agent. For every demand request, Pythia observes multiple different types of program context information to take a prefetch decision. For every prefetch decision, Pythia receives a numerical reward that evaluates prefetch quality under the current memory bandwidth utilization. Pythia uses this reward to reinforce the correlation between program context information and prefetch decision to generate highly accurate, timely, and system-aware prefetch requests in the future.
+Pythia formulates hardware prefetching as a reinforcement learning task. For every demand request, Pythia observes multiple different types of program context information to take a prefetch decision. For every prefetch decision, Pythia receives a numerical reward that evaluates prefetch quality under the current memory bandwidth utilization. Pythia uses this reward to reinforce the correlation between program context information and prefetch decision to generate highly accurate, timely, and system-aware prefetch requests in the future.
 
 ## About The Framework
 
@@ -120,8 +119,8 @@ The infrastructure has been tested with the following system configuration:
 1. Use the `download_traces.pl` perl script to download necessary ChampSim traces used in our paper. 
 
     ```bash
-    mkdir traces/
-    cd scripts/
+    mkdir $PYTHIA_HOME/traces/
+    cd $PYTHIA_HOME/scripts/
     perl download_traces.pl --csv artifact_traces.csv --dir ../traces/
     ```
 > Note: the total size of all traces would be **~52 GB**.
@@ -138,7 +137,6 @@ The infrastructure has been tested with the following system configuration:
      * DPC-3 traces: http://hpca23.cse.tamu.edu/champsim-traces/speccpu/
      * CVP-2 traces: https://www.microarch.org/cvp1/cvp2/rules.html
 
-<!-- USAGE EXAMPLES -->
 ## Experimental Workflow
 Our experimental workflow consists of two stages: (1) launching experiments, and (2) rolling up statistics from experiment outputs.
 
@@ -151,20 +149,19 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
 3. Create experiments as follows. Please make sure the paths used in tlist and exp files are appropriately changed.
    
       ```bash
-      cd experiments/
+      cd $PYTHIA_HOME/experiments/
       perl ../scripts/create_jobfile.pl --exe $PYTHIA_HOME/bin/perceptron-multi-multi-no-ship-1core --tlist MICRO21_1C.tlist --exp MICRO21_1C.exp --local 1 > jobfile.sh
       ```
 
-4. Create a directory inside `experiements` to launch runs in the following way:
+4. Go to a run directory (or create one) inside `experiements` to launch runs in the following way:
       ```bash
-      mkdir pythia_1C_experiments/
-      cd pythia_1C_experiments
+      cd experiments_1C
       source ../jobfile.sh
       ```
 
 5. If you have [slurm](https://slurm.schedmd.com) support to launch multiple jobs in a compute cluster, please provide `--local 0` to `create_jobfile.pl`
 
-### Rolling up Statistics
+### Rolling-up Statistics
 1. To rollup stats in bulk, we will use `scripts/rollup.pl`
 2. `rollup.pl` requires three necessary arguments:
       * `tlist`
@@ -178,6 +175,17 @@ Our experimental workflow consists of two stages: (1) launching experiments, and
       ```
 
 4. Export the `rollup.csv` file in you favourite data processor (Python Pandas, Excel, Numbers, etc.) to gain insights.
+
+## HDL Implementation
+We also implement Pythia in [Chisel HDL](https://www.chisel-lang.org) to faithfully measure the area and power cost. The implementation, along with the reports from umcL65 library, can be found the following GitHub repo. Please note that the area and power projections in the sample report is different than what is reported in the paper due to different technology.
+
+<p align="center">
+<a href="https://github.com/rahulbera/Pythia-HDL">Pythia-HDL</a>
+    <a href="https://github.com/rahulbera/Pythia-HDL">
+        <img alt="Build" src="https://github.com/rahulbera/Pythia-HDL/actions/workflows/test.yml/badge.svg">
+    </a>
+</p>
+
 
 ## Citation
 If you use this framework, please cite the following paper:
