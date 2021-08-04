@@ -126,8 +126,8 @@ The infrastructure has been tested with the following system configuration:
 
 ### More Traces
 1. We are also releasing a new set of ChampSim traces from [PARSEC 2.1](https://parsec.cs.princeton.edu) and [Ligra](https://github.com/jshun/ligra). The trace drop-points are measured using [Intel Pinplay](https://software.intel.com/content/www/us/en/develop/articles/program-recordreplay-toolkit.html) and the traces are captured by the ChampSim PIN tool. The traces can be found in the following links:
-      * PARSEC-2.1: https://mega.nz/folder/hp1wCRBI#TlHy4GKlEHW-Eyk4AfwBZA
-      * Ligra: https://mega.nz/folder/p1tklDKA#Kz6Z-gs7J1Yl5qcrzpPIPg 
+      * PARSEC-2.1: https://bit.ly/champsim-parsec2
+      * Ligra: https://bit.ly/champsim-ligra
    
 2. Our simulation infrastructure is completely compatible with all prior ChampSim traces used in CRC-2 and DPC-3. One can also convert the CVP-2 traces (courtesy of Qualcomm Datacenter Technologies) to ChampSim format using [the following converter](https://github.com/ChampSim/ChampSim/tree/master/cvp_tracer). The traces can be found in the follwing websites:
      * CRC-2 traces: http://bit.ly/2t2nkUj
