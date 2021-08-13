@@ -1,9 +1,11 @@
 #!/usr/bin/perl
 
-use lib '/mnt/panzer/rahbera/ChampSim/scripts';
 use warnings;
 use Getopt::Long;
 
+die "\$PYTHIA_HOME env variable is not defined.\nHave you sourced setvars.sh?\n" unless defined $ENV{'PYTHIA_HOME'};
+
+my $megatool_exe = "$ENV{'PYTHIA_HOME'}/scripts/megatools-1.11.0-git-20210505-linux-x86_64/megatools";
 my $input_file;
 my $dir=".";
 GetOptions('csv=s' => \$input_file,
@@ -25,7 +27,7 @@ foreach my $line (@lines)
     my $cmd;
     if($trace_file_url =~ /mega\.nz/)
     {
-	    $cmd = "megadl $trace_file_url --path=$dir";
+	    $cmd = "$megatool_exe dl --path=$dir $trace_file_url";
     }
     else
     {

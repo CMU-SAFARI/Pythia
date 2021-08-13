@@ -16,9 +16,9 @@
     <a href="https://doi.org/10.5281/zenodo.5150706"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5150706.svg" alt="DOI"></a>
 </p>
 
-## Update
+<!-- ## Update
 ### Aug 13th, 2021
-It has been brought to our attention that the Ligra and PARSEC-2.1 traces required to evaluate the artifact are not correctly getting downloaded using the `download_traces.pl` script. For now, we ask the reader to download **all** Ligra and PARSEC-2.1 traces (~10 GB) by (1) clicking on the mega link (see [Section 5](https://github.com/CMU-SAFARI/Pythia#more-traces)), and (2) clicking on "Download as ZIP" option. We are working with megatools developer to resolve the issue soon. 
+It has been brought to our attention that the Ligra and PARSEC-2.1 traces required to evaluate the artifact are not correctly getting downloaded using the `download_traces.pl` script. For now, we ask the reader to download **all** Ligra and PARSEC-2.1 traces (~10 GB) by (1) clicking on the mega link (see [Section 5](https://github.com/CMU-SAFARI/Pythia#more-traces)), and (2) clicking on "Download as ZIP" option. We are working with megatools developer to resolve the issue soon.  -->
 
 <details open="open">
   <summary>Table of Contents</summary>
@@ -75,13 +75,13 @@ Most of the  prefetchers (e.g., SPP [1], Bingo [2], IPCP [3]) reuse codes from [
 The infrastructure has been tested with the following system configuration:
   * G++ v6.3.0 20170516
   * Perl v5.24.1
-  * [Megatools 1.9.98](https://megatools.megous.com) (required to download traces)
+  * [Megatools 1.11.0](https://megatools.megous.com) (Note that v1.9.98 does **NOT** work)
 
 ## Installation
 
 0. Install necessary prequisites
     ```bash
-    sudo apt install perl megatools
+    sudo apt install perl
     ```
 1. Clone the GitHub repo
    
@@ -117,7 +117,14 @@ The infrastructure has been tested with the following system configuration:
     ```
 
 ## Preparing Traces
-1. Use the `download_traces.pl` perl script to download necessary ChampSim traces used in our paper. 
+0. Install the megatools executable
+
+    ```bash
+    cd $PYTHIA_HOME/scripts
+    wget https://megatools.megous.com/builds/experimental/megatools-1.11.0-git-20210505-linux-x86_64.tar.gz
+    tar -xvf megatools-1.11.0-git-20210505-linux-x86_64.tar.gz
+    ```
+1. Use the `download_traces.pl` perl script to download necessary ChampSim traces used in our paper.
 
     ```bash
     mkdir $PYTHIA_HOME/traces/
