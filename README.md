@@ -16,6 +16,10 @@
     <a href="https://doi.org/10.5281/zenodo.5150706"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5150706.svg" alt="DOI"></a>
 </p>
 
+## Update
+### Aug 13th, 2021
+It has been brought to our attention that the Ligra and PARSEC-2.1 traces required to evaluate the artifact are not correctly getting downloaded using the `download_traces.pl` script. For now, we ask the reader to download **all** Ligra and PARSEC-2.1 traces (~10 GB) by (1) clicking on the mega link (see [Section 5](https://github.com/CMU-SAFARI/Pythia#more-traces)), and (2) clicking on "Download as ZIP" option. We are working with megatools developer to resolve the issue soon. 
+
 <details open="open">
   <summary>Table of Contents</summary>
   <ol>
