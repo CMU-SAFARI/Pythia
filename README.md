@@ -105,6 +105,7 @@ The infrastructure has been tested with the following system configuration:
 4. Build Pythia for single/multi core using build script. This should create the executable inside `bin` directory.
    
    ```bash
+   cd $PYTHIA_HOME
    # ./build_champsim.sh <l1_pref> <l2_pref> <llc_pref> <ncores>
    ./build_champsim.sh multi multi no 1
    ```
