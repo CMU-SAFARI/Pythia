@@ -74,6 +74,7 @@ Most of the  prefetchers (e.g., SPP [1], Bingo [2], IPCP [3]) reuse codes from [
 
 The infrastructure has been tested with the following system configuration:
   * G++ v6.3.0 20170516
+  * CMake v3.20.2
   * Perl v5.24.1
   * [Megatools 1.11.0](https://megatools.megous.com) (Note that v1.9.98 does **NOT** work)
 
