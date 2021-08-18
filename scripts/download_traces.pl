@@ -37,4 +37,15 @@ foreach my $line (@lines)
     #print("$cmd\n");
 }
 
+my $total_traces = `wc -l $input_file | awk '{print \$1}'`;
+my $downloaded = `ls -1 $dir | wc -l`;
+chomp($total_traces);
+chomp($downloaded);
+
+print "\n";
+print "================================\n";
+print "Trace downloading completed\n";
+print "Downloaded $downloaded/$total_traces traces\n";
+print "================================\n";
+
 sub  trim { my $s = shift; $s =~ s/^\s+|\s+$//g; return $s };
