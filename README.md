@@ -75,6 +75,7 @@ Most of the  prefetchers (e.g., SPP [1], Bingo [2], IPCP [3]) reuse codes from [
 The infrastructure has been tested with the following system configuration:
   * G++ v6.3.0 20170516
   * CMake v3.20.2
+  * md5sum v8.26
   * Perl v5.24.1
   * [Megatools 1.11.0](https://megatools.megous.com) (Note that v1.9.98 does **NOT** work)
 
@@ -133,9 +134,16 @@ The infrastructure has been tested with the following system configuration:
     cd $PYTHIA_HOME/scripts/
     perl download_traces.pl --csv artifact_traces.csv --dir ../traces/
     ```
-> Note: the total size of all traces would be **~52 GB**.
+> Note: The script should download **233** traces. Please check the final log for any incomplete downloads. The total size of all traces would be **~52 GB**.
 
-2. If the traces are downloaded in some other path, please change the full path in `experiments/MICRO21_1C.tlist` and `experiments/MICRO21_4C.tlist` accordingly.
+2. Once the trace download completes, please verify the checksum as follows. _Please make sure all traces pass the checksum test._
+
+    ```bash
+    cd $PYTHIA_HOME/traces
+    md5sum -c ../scripts/artifact_traces.md5
+    ```
+
+3. If the traces are downloaded in some other path, please change the full path in `experiments/MICRO21_1C.tlist` and `experiments/MICRO21_4C.tlist` accordingly.
 
 ### More Traces
 1. We are also releasing a new set of ChampSim traces from [PARSEC 2.1](https://parsec.cs.princeton.edu) and [Ligra](https://github.com/jshun/ligra). The trace drop-points are measured using [Intel Pinplay](https://software.intel.com/content/www/us/en/develop/articles/program-recordreplay-toolkit.html) and the traces are captured by the ChampSim PIN tool. The traces can be found in the following links. To download these traces in bulk, please use the "Download as ZIP" option from mega.io web-interface.
