@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use our framework to evaluate Pythia, please cite the work as follows."
+authors:
+- family-names: "Bera"
+  given-names: "Rahul"
+- family-names: "Kanellopoulos"
+  given-names: "Konstantinos"
+title: "Pythia: A Customizable Hardware Prefetching Framework Using Online Reinforcement Learning"
+version: 1.3
+doi: 10.5281/zenodo.5520125
+date-released: 2021-09-22
+url: "https://github.com/CMU-SAFARI/Pythia"
+preferred-citation:
+  title: "Pythia: A Customizable Hardware Prefetching Framework Using Online Reinforcement Learning"
+  type: proceedings
+  year: 2021
+  conference: 
+    name: "54th International Symposium on Microarchitecture(MICRO)"
+  authors:
+  - family-names: "Bera"
+    given-names: "Rahul"
+  - family-names: "Kanellopoulos"
+    given-names: "Konstantinos"
+  - family-names: "Nori"
+    given-names: "Anant V."
+  - family-names: "Shahroodi"
+    given-names: "Taha"
+  - family-names: "Subramoney"
+    given-names: "Sreenivas"
+  - family-names: "Mutlu"
+    given-names: "Onur"
+  doi: "10.1145/3466752.3480114"
