@@ -38,6 +38,7 @@ It has been brought to our attention that the Ligra and PARSEC-2.1 traces requir
       </ul>
     </li>
     <li><a href="#hdl-implementation">HDL Implementation</a></li>
+    <li><a href="#code-walkthrough">Code Walkthrough</a></li>
     <li><a href="#citation">Citation</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -204,6 +205,13 @@ We also implement Pythia in [Chisel HDL](https://www.chisel-lang.org) to faithfu
     </a>
 </p>
 
+## Code Walkthrough
+> Pythia was code-named Scooby (the mistery-solving dog) during the developement. So any mention of Scooby anywhere in the code inadvertently means Pythia.
+
+* The top-level files for Pythia are `prefetchers/scooby.cc` and `inc/scooby.h`. These two files declare and define the high-level functions for Pythia (e.g., `invoke_prefetcher`, `register_fill`, etc.). 
+* The released version of Pythia has two types of RL engine defined: _basic_ and _featurewise_. They differ only in terms of the QVStore organization (please refer to our [paper](arxiv.org/pdf/2109.12021.pdf) to know more about QVStore). The QVStore for _basic_ version is simply defined as a two-dimensional table, whereas the _featurewise_ version defines it as a hierarchichal organization of multiple small tables. The implementation of respective engines can be found in `src/` and `inc/` directories.
+* `inc/feature_knowledge.h` and `src/feature_knowldege.cc` define how to compute each program feature from the raw attributes of a deamand request. If you want to define your own feature, extend the enum `FeatureType` in `inc/feature_knowledge.h` and define its corresponding `process` function.
+* `inc/util.h` and `src/util.cc` contain all hashing functions used in our evaluation. Play around with them, as a better hash function can also provide performance benefits.
 
 ## Citation
 If you use this framework, please cite the following paper:
