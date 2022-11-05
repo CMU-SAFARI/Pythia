@@ -14,7 +14,7 @@ uint32_t rrpv[LLC_SET][LLC_WAY],
          PSEL[NUM_CPUS];
 unsigned rand_sets[TOTAL_SDM_SETS];
 
-void CACHE::llc_initialize_replacement()
+void CACHE::llc_initialize_replacement(uint64_t _rand_seed)
 {
     cout << "Initialize DRRIP state" << endl;
 
@@ -24,7 +24,7 @@ void CACHE::llc_initialize_replacement()
     }
 
     // randomly selected sampler sets
-    srand(time(NULL));
+    srand(_rand_seed);
     unsigned long rand_seed = 1;
     unsigned long max_rand = 1048576;
     uint32_t my_set = LLC_SET;

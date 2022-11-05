@@ -4,7 +4,7 @@
 uint32_t rrpv[LLC_SET][LLC_WAY];
 
 // initialize replacement state
-void CACHE::llc_initialize_replacement()
+void CACHE::llc_initialize_replacement(uint64_t rand_seed)
 {
     cout << "Initialize SRRIP state" << endl;
 

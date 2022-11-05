@@ -1,7 +1,7 @@
 #include "cache.h"
 
 // initialize replacement state
-void CACHE::llc_initialize_replacement()
+void CACHE::llc_initialize_replacement(uint64_t rand_seed)
 {
 
 }
