@@ -811,7 +811,7 @@ int main(int argc, char** argv)
         major_fault[i] = 0;
     }
 
-    uncore.LLC.llc_initialize_replacement();
+    uncore.LLC.llc_initialize_replacement(champsim_seed);
     uncore.LLC.llc_prefetcher_initialize();
 
     print_knobs();

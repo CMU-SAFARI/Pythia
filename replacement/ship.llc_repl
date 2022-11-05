@@ -52,7 +52,7 @@ class SHCT_class {
 SHCT_class SHCT[NUM_CPUS][SHCT_SIZE];
 
 // initialize replacement state
-void CACHE::llc_initialize_replacement()
+void CACHE::llc_initialize_replacement(uint64_t _rand_seed)
 {
     cout << "Initialize SHIP state" << endl;
 
@@ -70,7 +70,7 @@ void CACHE::llc_initialize_replacement()
     }
 
     // randomly selected sampler sets
-    srand(time(NULL));
+    srand(_rand_seed);
     unsigned long rand_seed = 1;
     unsigned long max_rand = 1048576;
     uint32_t my_set = LLC_SET;
