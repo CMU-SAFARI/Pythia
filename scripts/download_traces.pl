@@ -5,7 +5,7 @@ use Getopt::Long;
 
 die "\$PYTHIA_HOME env variable is not defined.\nHave you sourced setvars.sh?\n" unless defined $ENV{'PYTHIA_HOME'};
 
-my $megatool_exe = "$ENV{'PYTHIA_HOME'}/scripts/megatools-1.11.0-git-20210505-linux-x86_64/megatools";
+my $megatool_exe = "$ENV{'PYTHIA_HOME'}/scripts/megatools-1.11.1.20230212-linux-x86_64/megatools";
 my $input_file;
 my $dir=".";
 GetOptions('csv=s' => \$input_file,
