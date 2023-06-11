@@ -31,7 +31,7 @@ foreach my $line (@lines)
     }
     else
     {
-	    $cmd = "wget $trace_file_url -O $dir/$trace_file_name";
+	    $cmd = "wget --no-check-certificate $trace_file_url -O $dir/$trace_file_name";
     }
     system($cmd);
     #print("$cmd\n");
