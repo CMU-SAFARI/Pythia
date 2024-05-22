@@ -82,7 +82,7 @@ The infrastructure has been tested with the following system configuration:
   * CMake v3.20.2
   * md5sum v8.26
   * Perl v5.24.1
-  * [Megatools 1.11.0](https://megatools.megous.com) (Note that v1.9.98 does **NOT** work)
+  * [DEPRECATED] ~~[Megatools 1.11.0](https://megatools.megous.com) (Note that v1.9.98 does **NOT** work)~~
 
 ## Installation
 
@@ -125,7 +125,10 @@ The infrastructure has been tested with the following system configuration:
     ```
 
 ## Preparing Traces
-0. Install the megatools executable
+
+> **Update on May 22, 2024**: The megatool-based trace distribution framework has been deprecated due to stability issues. We have uploaded the Ligra and PARSEC 2.1 traces in the Google Drive (links below). Please download from these links, till we find a better alternative to Mega.
+
+0. [DEPRECATED] ~~Install the megatools executable~~
 
     ```bash
     cd $PYTHIA_HOME/scripts
@@ -143,6 +146,8 @@ The infrastructure has been tested with the following system configuration:
     ```
 > Note: The script should download **233** traces. Please check the final log for any incomplete downloads. The total size of all traces would be **~52 GB**.
 
+> **Update on May 22, 2024**: Ligra and PARSEC traces may fail to download. Please use the new Google Drive links mentioned below for downloading.
+
 2. Once the trace download completes, please verify the checksum as follows. _Please make sure all traces pass the checksum test._
 
     ```bash
@@ -154,8 +159,8 @@ The infrastructure has been tested with the following system configuration:
 
 ### More Traces
 1. We are also releasing a new set of ChampSim traces from [PARSEC 2.1](https://parsec.cs.princeton.edu) and [Ligra](https://github.com/jshun/ligra). The trace drop-points are measured using [Intel Pinplay](https://software.intel.com/content/www/us/en/develop/articles/program-recordreplay-toolkit.html) and the traces are captured by the ChampSim PIN tool. The traces can be found in the following links. To download these traces in bulk, please use the "Download as ZIP" option from mega.io web-interface.
-      * PARSEC-2.1: https://bit.ly/champsim-parsec2
-      * Ligra: https://bit.ly/champsim-ligra
+      * PARSEC-2.1: ~~https://bit.ly/champsim-parsec2~~ https://bit.ly/pythia-parsec-21
+      * Ligra: ~~https://bit.ly/champsim-ligra~~ https://bit.ly/pythia-ligra
    
 2. Our simulation infrastructure is completely compatible with all prior ChampSim traces used in CRC-2 and DPC-3. One can also convert the CVP-2 traces (courtesy of Qualcomm Datacenter Technologies) to ChampSim format using [the following converter](https://github.com/ChampSim/ChampSim/tree/master/cvp_tracer). The traces can be found in the follwing websites:
      * CRC-2 traces: http://bit.ly/2t2nkUj
