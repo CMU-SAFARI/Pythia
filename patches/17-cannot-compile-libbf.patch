@@ -1,0 +1,12 @@
+diff --git a/src/bitvector.cpp b/src/bitvector.cpp
+index ba4b3ac..1617256 100644
+--- a/src/bitvector.cpp
++++ b/src/bitvector.cpp
+@@ -2,6 +2,7 @@
+ 
+ #include <algorithm>
+ #include <cassert>
++#include <cstdint>
+ 
+ namespace bf {
+ 
